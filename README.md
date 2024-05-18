@@ -15,12 +15,9 @@
 </h1> 
 
 ## Table of Contents
-  - [Node JS Installation](#node-js-installation)
-  - [Git Installation](#git-installation)
-  - [Truffle Suite Installation](#truffle-suite-installation)
-  - [Infura(Ethereum Provider)](#infura)
+  -[Node JS Installation](#node-js-installation)
 
-# ➡️ Node JS Installation
+# ➡ Node JS Installation
    - [Node JS](https://nodejs.org/en/)
      
      ```sh
