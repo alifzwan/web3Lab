@@ -22,7 +22,7 @@
    - [4. Infura (Ethereum Provider)](#4-infura-ethereum-provider)
 
 # Setup Environment
-# 1. Node JS Installation
+## 1. Node JS Installation 
    - [Node JS](https://nodejs.org/en/)
      
      ```sh
@@ -33,7 +33,7 @@
       <img width="400" alt="NodeJS" src="https://github.com/alifzwan/web3Lab/assets/63784108/a25bda77-e4ee-4365-aa69-96a626c10241">
      </p>
 
-# 2. Git Installation
+## 2. Git Installation
    - [Git](https://git-scm.com/downloads)
      
      ```sh
@@ -44,7 +44,7 @@
         <img width="400" alt="Git" src="https://github.com/alifzwan/web3Lab/assets/63784108/a5a2a736-7a09-43fc-8b69-c02b26a9dbf1">
        </p>
        
-# 3. Truffle Suite Installation
+## 3. Truffle Suite Installation
    - [Truffle Suite](https://trufflesuite.com/docs/truffle/)
      
      ```sh
@@ -62,19 +62,19 @@
      ```sh
      truffle init
      ```
-## Folder Description
+  ### Folder Description
+  
+   <p align="center">
+        <img width="400" src="https://github.com/alifzwan/web3Lab/assets/63784108/d3f89b35-67fd-48ef-b8d4-43699754a6f9">
+   </p>
+  
+  - **Contracts** - This file contain all of our smart contract
+  - **Migrations** - This file is where we write script to deploy the smart contract
+  - **Test** - This file is for test/debug our smart contract
+  - `truffle-config.js` - This file contain our truffle configuration
 
- <p align="center">
-      <img width="400" src="https://github.com/alifzwan/web3Lab/assets/63784108/d3f89b35-67fd-48ef-b8d4-43699754a6f9">
- </p>
-
-- **Contracts** - This file contain all of our smart contract
-- **Migrations** - This file is where we write script to deploy the smart contract
-- **Test** - This file is for test/debug our smart contract
-- `truffle-config.js` - This file contain our truffle configuration
-
-# 4. Infura (Ethereum Provider)
-## Why we need Ethereum Provider?
+## 4. Infura (Ethereum Provider)
+### Why we need Ethereum Provider?
    Ethereum is a decentralized platform that runs smart contracts. These smart contracts are executed on all nodes in the Ethereum network.
    To interact with the Ethereum network (i.e., to read from or write to the blockchain), your application needs to connect to an Ethereum node.
 
@@ -88,7 +88,7 @@
   
    In the context of deploying a smart contract, instead of setting up your own Ethereum node to deploy the contract, you can use Infura's API. You provide your Infura API key (which identifies your project) and the smart contract you want to deploy. Infura then deploys the contract to the Ethereum network for you.
 
-## HDWalletProvider and Dotenv
+### HDWalletProvider and Dotenv
   - **HDWalletProvider** - used to create a connection to the Infura Ethereum node, allowing you to interact with the Ethereum network without running your own Ethereum node.
   - **Dotenv** - It helps to keep sensitive data out of your codebase, which is particularly important when your code is stored in a public repository.
   - Install HDWalletProvider and dotenv on our terminal    
@@ -109,7 +109,7 @@
       <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/fc714cda-0606-443a-83d0-bacc599c80fd">
     </p>
 
-## Register Infura
+### Register Infura
   - [Infura Registration](https://www.infura.io/)
   
   - Create your API (Name it **Web3Lab**) 
