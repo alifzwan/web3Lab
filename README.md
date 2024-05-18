@@ -15,9 +15,14 @@
 </h1> 
 
 ## Table of Contents
-  -[Node JS Installation](#node-js-installation)
+- [Setup Environment](#setup-environment)
+   - [1. Node JS Installation](#1-node-js-installation)
+   - [2. Git Installation](#2-git-installation)
+   - [3. Truffle Suite Installation](#3-truffle-suite-installation)
+   - [4. Infura (Ethereum Provider)](#4-infura-ethereum-provider)
 
-# ➡ Node JS Installation
+# Setup Environment
+# 1. Node JS Installation
    - [Node JS](https://nodejs.org/en/)
      
      ```sh
@@ -28,7 +33,7 @@
       <img width="400" alt="NodeJS" src="https://github.com/alifzwan/web3Lab/assets/63784108/a25bda77-e4ee-4365-aa69-96a626c10241">
      </p>
 
-# ➡️ Git Installation
+# 2. Git Installation
    - [Git](https://git-scm.com/downloads)
      
      ```sh
@@ -39,7 +44,7 @@
         <img width="400" alt="Git" src="https://github.com/alifzwan/web3Lab/assets/63784108/a5a2a736-7a09-43fc-8b69-c02b26a9dbf1">
        </p>
        
-# ➡️ Truffle Suite Installation
+# 3. Truffle Suite Installation
    - [Truffle Suite](https://trufflesuite.com/docs/truffle/)
      
      ```sh
@@ -68,16 +73,20 @@
 - **Test** - This file is for test/debug our smart contract
 - `truffle-config.js` - This file contain our truffle configuration
 
-# ➡️ Infura (Ethereum Provider)
+# 4. Infura (Ethereum Provider)
 ## Why we need Ethereum Provider?
-  - Ethereum is a decentralized platform that runs smart contracts. These smart contracts are executed on all nodes in the Ethereum network.
-  - To interact with the Ethereum network (i.e., to read from or write to the blockchain), your application needs to connect to an Ethereum node.
+   Ethereum is a decentralized platform that runs smart contracts. These smart contracts are executed on all nodes in the Ethereum network.
+   To interact with the Ethereum network (i.e., to read from or write to the blockchain), your application needs to connect to an Ethereum node.
 
-  - Now, running your own Ethereum node can be resource-intensive. It requires downloading and synchronizing the entire Ethereum blockchain, which can take a lot of time and storage space. It also requires maintenance to stay synchronized with the network.
-  - This is where Infura comes in. Infura hosts Ethereum nodes for you and provides a simple API to interact with them.
-  - This means you can focus on building your application without worrying about maintaining an Ethereum node.
-  - When you use Infura, your application sends API requests to Infura's servers. Infura's servers then interact with the Ethereum network on your behalf. They execute the necessary operations (like reading from or writing to the blockchain) and then return the results to your application.
-  - In the context of deploying a smart contract, instead of setting up your own Ethereum node to deploy the contract, you can use Infura's API. You provide your Infura API key (which identifies your project) and the smart contract you want to deploy. Infura then deploys the contract to the Ethereum network for you.
+   Now, running your own Ethereum node can be resource-intensive. It requires downloading and synchronizing the entire Ethereum blockchain, which can take a lot of time and storage space. It also requires maintenance to stay synchronized with the network.
+   
+   This is where Infura comes in. Infura hosts Ethereum nodes for you and provides a simple API to interact with them.
+   
+   This means you can focus on building your application without worrying about maintaining an Ethereum node.
+  
+   When you use Infura, your application sends API requests to Infura's servers. Infura's servers then interact with the Ethereum network on your behalf. They execute the necessary operations (like reading from or writing to the blockchain) and then return the results to your application.
+  
+   In the context of deploying a smart contract, instead of setting up your own Ethereum node to deploy the contract, you can use Infura's API. You provide your Infura API key (which identifies your project) and the smart contract you want to deploy. Infura then deploys the contract to the Ethereum network for you.
 
 ## HDWalletProvider and Dotenv
   - **HDWalletProvider** - used to create a connection to the Infura Ethereum node, allowing you to interact with the Ethereum network without running your own Ethereum node.
