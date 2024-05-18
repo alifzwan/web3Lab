@@ -98,7 +98,7 @@
     ```sh
      npm install dotenv
     ```
-  - Uncopy code in our `truffle.config.js`
+  - Uncomment code in our `truffle.config.js`
 
     <p align="center">
       <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/84c132e5-ee03-41c7-92a6-97048cac9732">
