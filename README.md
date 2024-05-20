@@ -16,15 +16,27 @@
 
 ## Table of Contents
 - [Setup Environment](#setup-environment)
-   - [1. Node JS Installation](#1-node-js-installation)
-   - [2. Git Installation](#2-git-installation)
-   - [3. Truffle Suite Installation](#3-truffle-suite-installation)
+   - [1. Node JS](1-node-js)
+     - [Node JS Installation](#node-js-installation)
+   - [2. Git](#2-git)
+     - [Git Installation](#git-installation)
+   - [3. Truffle Suite](#3-truffle-suite)
+     - [Truffle Suite Installation](#truffle-suite-installation)
+     - [Folder Description](#folder-description)
    - [4. Infura (Ethereum Provider)](#4-infura-ethereum-provider)
+     - [Why We Need Ethereum Provider](#why-we-need-ethereum-provider)
+     - [HDWalletProvider and Dotenv](#hdwalletprovider-and-dotenv)
+     - [Register Infura](#register-infura)
 
 # Setup Environment
-## 1. Node JS Installation 
+## 1. Node JS
+Node Js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a web browser.
+
+Developers could use JavaScript to write command line tools and for server-side scripting—running scripts server-side to produce dynamic web page content before the page is sent to the user's web browser.
+
+## Node JS Installation 
    - [Node JS](https://nodejs.org/en/)
-     
+
      ```sh
      node -v
      ```
@@ -33,7 +45,11 @@
       <img width="400" alt="NodeJS" src="https://github.com/alifzwan/web3Lab/assets/63784108/a25bda77-e4ee-4365-aa69-96a626c10241">
      </p>
 
-## 2. Git Installation
+     
+## 2. Git
+Git is a version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+## Git Installation
    - [Git](https://git-scm.com/downloads)
      
      ```sh
@@ -44,7 +60,12 @@
         <img width="400" alt="Git" src="https://github.com/alifzwan/web3Lab/assets/63784108/a5a2a736-7a09-43fc-8b69-c02b26a9dbf1">
        </p>
        
-## 3. Truffle Suite Installation
+## 3. Truffle Suite
+Truffle Suite is a development environment, testing framework, and asset pipeline for Ethereum, aiming to make life as an Ethereum developer easier. 
+
+It provides a suite of tools that allow developers to write smart contracts with the Solidity programming language, test them, deploy them, and build decentralized applications (dApps) on top of them.
+
+## Truffle Suite Installation
    - [Truffle Suite](https://trufflesuite.com/docs/truffle/)
      
      ```sh
