@@ -8,6 +8,9 @@
   <a href="https://trufflesuite.com/docs/truffle/" target="_blank" rel="noopener noreferrer">
     <img src="https://seeklogo.com/images/T/truffle-logo-2DC7EBABF2-seeklogo.com.png" width="120" height='120'>
   </a>
+  <a href="https://ethereum.org/en/developers/docs/" target="_blank" rel="noopener noreferrer">
+    <img src="https://seeklogo.com/images/E/ethereum-logo-DE26DD608D-seeklogo.com.png" width="90" height='120'>
+  </a>
 </p>
 
 <h1 align="center">   
