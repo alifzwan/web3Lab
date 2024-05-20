@@ -11,7 +11,7 @@
 </p>
 
 <h1 align="center">   
-  Setup Environment for our Web 3
+  Decentralized Application: Web 3
 </h1> 
 
 ## Table of Contents
