@@ -30,9 +30,12 @@
      - [Why We Need Ethereum Provider](#why-we-need-ethereum-provider)
      - [HDWalletProvider and Dotenv](#hdwalletprovider-and-dotenv)
      - [Register Infura](#register-infura)
-   - [5. Initialize Our Smart Contract](#5-initialize-our-smart-contract)
+- [Smart Contract Deployment](#smart-contract-deployment)
+   - [1. Initialize Our Smart Contract](#1-initialize-our-smart-contract)
      - [What Are The Purpose Of Migration?](#what-are-the-purpose-of-migration)
-   - [6. Initialize Our Script Of Deployment](#6-initialize-our-script-of-deployment)
+     - [Migration Explanation](#migration-explanation)
+     - [What If You Dont Include Migration?](#what-if-you-dont-include-migration)
+   - [2. Initialize Our Script Of Deployment](#2-initialize-our-script-of-deployment)
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder) 
 
 # Setup Environment
@@ -188,7 +191,9 @@ It provides a suite of tools that allow developers to write smart contracts with
         <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/abfb1dd0-ab9d-41c2-9d2c-4f05030a01ae">
       </p>
 
-## 5. Initialize Our Smart Contract
+# Smart Contract Deployment      
+
+## 1. Initialize Our Smart Contract
   - Create one file within `Contracts` folder name `Migration.sol`
     ```sol
     // SPDX-License-Identifier: MIT
@@ -212,11 +217,11 @@ It provides a suite of tools that allow developers to write smart contracts with
     }
     ```
 ### What Are The Purpose Of Migration?
-  The Migrations.sol file in the Truffle Suite is a special contract that helps manage the deployment of other contracts to the Ethereum network.
+  The `Migrations.sol` file in the Truffle Suite is a special contract that helps manage the deployment of other contracts to the Ethereum network.
   
   Its purpose is to track and handle the deployment of smart contracts in a systematic way.
 
-  **Explanation**: 
+### Migration Explanation 
 
   Order of Deployment:
   - Truffle uses migration scripts to deploy contracts in a specific order. 
@@ -238,12 +243,12 @@ It provides a suite of tools that allow developers to write smart contracts with
   - These scripts are placed in the migrations folder and executed in order.
 
 
-  **What if you dont include `Migration.sol`?**
-  - If you don't include Migrations.sol in your contract folder, you won't be able to use the Truffle migration process.
+### What if you dont include Migration?
+  - If you don't include `Migrations.sol` in your contract folder, you won't be able to use the Truffle migration process.
   - Truffle relies on this contract to keep track of deployed contracts and their versions. 
   - Omitting it may result in an incomplete or disorganized deployment process.
 
-## 6. Initialize Our Script Of Deployment
+## 2. Initialize Our Script Of Deployment
 - Create one file within `migration` folder name `1_migration.js`
   ```js
   const Migrations = artifacts.require("Migrations");
