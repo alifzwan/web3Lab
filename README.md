@@ -365,8 +365,20 @@ You must firstly fund your metamask using [Infura Faucet](https://www.infura.io/
 
 If you're wallet is 0 ETH, you cannot deploy the Smart Contract as it requires a gas to deploy it to the Ethereum Network.
 
+Before that, change your metamask's network into test network 
+
+
 <p align="center">
-    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/bc3309d9-2369-4fa7-b82e-28a440d1a441">
+    <img width="250" src="https://github.com/alifzwan/web3Lab/assets/63784108/2c9befbc-5ec7-4be1-8331-64415fe1630c">
+</p> 
+
+<p align="center">
+    <img width="250" src="https://github.com/alifzwan/web3Lab/assets/63784108/71a8e104-11c6-4764-97e1-a86f8d95e7b0">
+</p> 
+
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/bc3309d9-2369-4fa7-b82e-28a440d1a441">
 </p>
 
 Copy your wallet address of your Metamask account 
@@ -376,6 +388,8 @@ Copy your wallet address of your Metamask account
 </p>
 
 and you'll get 0.5 ETH. This fund is for testing purposes. Meaning you cannot do any transaction to buy things using it. 
+
+If those two website cannot fund your wallet, you can search for another faucet by typing in google "sepolia testnet faucet"
 
 ## 2. Deploy Smart Contract
 Firstly, we have to make sure to check compiler's version on our `truffle.config.js`
@@ -444,7 +458,7 @@ Using Ethereum Explore is a good practice for Decentralized Application as it pr
 
 Another method (for me), usually i'll check my `json` file 
 <p align="center">
-    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/e18b9b2f-8f6f-4f99-96c5-b898a3008074">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/e18b9b2f-8f6f-4f99-96c5-b898a3008074">
 </p>
 
 within `networks:{}`, you can check your `network_id`, contract address, and transaction hash. If your smart contract is not deployed to Ethereum Network, this information would not appear on our `.json`.
