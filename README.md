@@ -361,7 +361,9 @@ You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you wan
 
 ## 1. Fund Your Metamask
 
-You must firstly fund your metamask using [Ethereum Faucet](https://www.infura.io/faucet/sepolia) 
+You must firstly fund your metamask using [Infura Faucet](https://www.infura.io/faucet/sepolia) or [Alchemy Faucet](https://www.alchemy.com/faucets/ethereum-sepolia) 
+
+If you're wallet is 0 ETH, you cannot deploy the Smart Contract as it requires a gas to deploy it to the Ethereum Network.
 
 <p align="center">
     <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/bc3309d9-2369-4fa7-b82e-28a440d1a441">
