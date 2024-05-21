@@ -26,10 +26,10 @@
    - [3. Truffle Suite](#3-truffle-suite)
      - [Truffle Suite Installation](#truffle-suite-installation)
      - [Folder Description](#folder-description)
-   - [4. Infura (Ethereum Provider)](#4-infura-ethereum-provider)
+   - [4. Alchemy (Ethereum Provider)](#4-alchemy-ethereum-provider)
      - [Why We Need Ethereum Provider](#why-we-need-ethereum-provider)
      - [HDWalletProvider and Dotenv](#hdwalletprovider-and-dotenv)
-     - [Register Infura](#register-infura)
+     - [Register Alchemy](#register-alchemy)
 - [Smart Contract](#smart-contract)
    - [1. Initialize Our Smart Contract](#1-initialize-our-smart-contract)
      - [What Are The Purpose Of Migration?](#what-are-the-purpose-of-migration)
@@ -39,6 +39,12 @@
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
    - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
 - [Deployment Of Smart Contract](#deployment-of-smart-contract)
+   - [1. Verify Your Deployment On Ethereum Explorer](#1-verify-your-deployment-on-ethereum-explorer)
+     - [What Is Ethereum Explorer?](#what-is-ethereum-explorer)
+- [Integration With Web Application](#integration-with-web-application)
+   - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
+     - [Application Binary Interface (ABI)](#application-binary-interface-abi)
+
 
 # Setup Environment
 ## 1. Node JS
@@ -106,20 +112,20 @@ It provides a suite of tools that allow developers to write smart contracts with
   - **Test** - This file is for test/debug our smart contract
   - `truffle-config.js` - This file contain our truffle configuration
 
-## 4. Infura (Ethereum Provider)
+## 4. Alchemy (Ethereum Provider)
 ### Why we need Ethereum Provider?
    Ethereum is a decentralized platform that runs smart contracts. These smart contracts are executed on all nodes in the Ethereum network.
    To interact with the Ethereum network (i.e., to read from or write to the blockchain), your application needs to connect to an Ethereum node.
 
    Now, running your own Ethereum node can be resource-intensive. It requires downloading and synchronizing the entire Ethereum blockchain, which can take a lot of time and storage space. It also requires maintenance to stay synchronized with the network.
    
-   This is where Infura comes in. Infura hosts Ethereum nodes for you and provides a simple API to interact with them.
+   This is where Alchemy comes in. Alchemy hosts Ethereum nodes for you and provides a simple API to interact with them.
    
    This means you can focus on building your application without worrying about maintaining an Ethereum node.
   
-   When you use Infura, your application sends API requests to Infura's servers. Infura's servers then interact with the Ethereum network on your behalf. They execute the necessary operations (like reading from or writing to the blockchain) and then return the results to your application.
+   When you use Alchemy, your application sends API requests to Alchemy's servers. Alchemy's servers then interact with the Ethereum network on your behalf. They execute the necessary operations (like reading from or writing to the blockchain) and then return the results to your application.
   
-   In the context of deploying a smart contract, instead of setting up your own Ethereum node to deploy the contract, you can use Infura's API. You provide your Infura API key (which identifies your project) and the smart contract you want to deploy. Infura then deploys the contract to the Ethereum network for you.
+   In the context of deploying a smart contract, instead of setting up your own Ethereum node to deploy the contract, you can use Alchemy's API. You provide your Alchemy API key (which identifies your project) and the smart contract you want to deploy. Alchemy then deploys the contract to the Ethereum network for you.
 
 ### HDWalletProvider and Dotenv
   - **HDWalletProvider** - used to create a connection to the Infura Ethereum node, allowing you to interact with the Ethereum network without running your own Ethereum node.
@@ -142,35 +148,39 @@ It provides a suite of tools that allow developers to write smart contracts with
       <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/fc714cda-0606-443a-83d0-bacc599c80fd">
     </p>
 
-### Register Infura
-  - [Infura Registration](https://www.infura.io/)
+### Register Alchemy
+  - [Alchemy Registration](https://www.alchemy.com/)
   
   - Create your API (Name it **Web3Lab**) 
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/d42a993e-7ac0-46a2-9948-6907c879cdfb">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/1f603283-d1f8-424a-8d62-c17c762bad27">
     </p>
   - Choose Sepolia network
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/cf827272-4b29-46b5-bda6-cbedf328a810">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/4657bba8-7e8c-4693-bbea-82c778d18b90">
     </p>
   - Copy your Endpoint and paste in on our `truffle.config.js` 
 
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/6a2a2276-562e-4bb8-92f9-e80edc6859ff">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/7025839e-02ed-4910-8c55-ee3fa17586c6">
     </p>
 
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/3f38117e-3e10-4fea-908d-10a4e64a780a">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/763b66e8-cfb5-42ea-b179-0edf6b32fd5d">
+    </p>
+    
+    <p align="center">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/ce12fef7-3f0f-4e91-a5d3-1eaf4e9d3fbc">
     </p>
     
   - Create `.env` file to store our **PROJECT_ID** and **MNEMONIC** 
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/c30438ba-9a2e-45cd-9afe-1b06b934f353">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/7c821963-18b4-4b1f-a577-3fb8ed3f701b">
     </p>
     
   - Refactor your API on `truffle.config.js`
     <p align="center">
-      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/676f5d86-18e8-4ad5-88f0-a5c216aba68a">
+      <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/42253083-df43-45b8-88bb-20d1c9f1ca6a">
     </p>
 
 
@@ -190,7 +200,7 @@ It provides a suite of tools that allow developers to write smart contracts with
    - Now, every ethereum network has different network_id. Think of it like an address (Alamat). Since we're using **sepolia** as our ethereum network, we have to change our network_id.
      - Change your `network_id` to 11155111 
       <p align="center">
-        <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/abfb1dd0-ab9d-41c2-9d2c-4f05030a01ae">
+        <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/7a5d9c30-d7ee-4083-a9bd-9ec8720286d0">
       </p>
 
 # Smart Contract       
@@ -282,50 +292,45 @@ It provides a suite of tools that allow developers to write smart contracts with
   // SPDX-License-Identifier: MIT
   pragma solidity 0.8.19;
 
-  contract Crowdfunding {
+  contract CrowdFunding {
       address public owner;         // Variable to store the owner of the crowdfunding campaign.
       uint public goal;             // Variable to store the goal of the crowdfunding campaign.
-      uint public deadline;         // Variable to store the deadline of the crowdfunding campaign.
       uint public raisedAmount = 0; // Variable to store the total amount raised.
       mapping(address => uint) public contributions; // Mapping to store the contributions of each address.
-  
+
       // Constructor - function that will be called upon contract deployment.
-      constructor(uint _goal, uint _deadlineInMinutes) {
+      constructor(uint _goal) {
           owner = msg.sender;
           goal = _goal;
-          deadline = block.timestamp + (_deadlineInMinutes * 1 minutes); // Set the deadline in minutes.
       }
-  
+
       // Modifier - function to restrict access to a certain function.
       modifier onlyByOwner{ 
           require(msg.sender == owner, "Only owner can check raised amount.");
           _;
       }
-  
+
       // contribute() - Function to contribute to the crowdfunding campaign.
       function contribute() public payable {
-          require(block.timestamp <= deadline, "The crowdfunding campaign is already over.");
           require(msg.value > 0, "Contribution amount must be greater than 0");
           require(raisedAmount + msg.value <= goal, "Goal has already been reached");
-  
+
           contributions[msg.sender] += msg.value;
           raisedAmount += msg.value;
       }
-  
+
       // withdrawFunds() - function to withdraw funds after the deadline has passed and the goal has been reached. 
       function withdrawFunds() public onlyByOwner{
-          require(block.timestamp > deadline, "The crowdfunding campaign is not over yet.");
           require(raisedAmount >= goal, "Goal has not been reached yet");
-  
+
           payable(owner).transfer(raisedAmount); // Transfer the raised amount to the owner.
           raisedAmount = 0;
       }
-  
+
       // refund() - function to refund the contributions if the deadline has passed and the goal has not been reached.
       function refund() public {
-          require(block.timestamp > deadline, "The crowdfunding campaign is not over yet.");
-          require(raisedAmount >= goal, "The crowdfunding campaign was successful.");
-          
+          require(raisedAmount > goal, "The crowdfunding campaign was successful.");
+        
           uint amount = contributions[msg.sender];
           contributions[msg.sender] = 0;
           payable(msg.sender).transfer(amount); // Refund the contribution amount to the contributor.
@@ -337,7 +342,7 @@ It provides a suite of tools that allow developers to write smart contracts with
   const CrowdFunding = artifacts.require("CrowdFunding");
   
   module.exports = function (deployer) {
-    deployer.deploy(CrowdFunding);
+    deployer.deploy(CrowdFunding, 200);
   };
  ```
 By now i suppose your directory is like this:
@@ -352,9 +357,17 @@ You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you wan
 
 # Deployment of Smart Contract
 
-Firstly, we have to compile our smart contract with command:
+Firstly, we have to make sure to check compiler's version on our `truffle.config.js`
+
+<p align="center">
+    <img width="500" src="![image](https://github.com/alifzwan/web3Lab/assets/63784108/1c799ff8-f24a-426c-96dc-1b5afd089943)">
+ </p>
+
+**Make Sure** that the version is the same as in your `.sol` file or else you'll catch an error halfway through
+
+Then we can compile our smart contract with the command:
 ```sh
-truffle compile
+truffle compile --reset
 ```
 This command will compile all of our smart contract in the folder `/contracts`
 
@@ -364,9 +377,95 @@ This command will compile all of our smart contract in the folder `/contracts`
  
 Now, we can deploy our smart contract with this command:
 ```sh
-truffle migrate
-
+truffle migrate --network sepolia --reset
 ```
+If you're getting this output, congratulations. You just deploy your first ever smart contract on ethereum network!
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/2c449642-5160-45c1-a691-d2aa31d36b12">
+</p>
+
+## 1. Verify Your Deployment On Ethereum Explorer 
+
+### What Is Ethereum Explorer?
+
+Ethereum explorer, also known as a blockchain explorer, is a tool that allows you to explore the Ethereum blockchain. It provides a user-friendly way to view and analyze the transactions, blocks, and addresses that make up the blockchain.
+
+You can verify whether your smart contract has been deploy or not on the ethereum network.
+
+Just copy your **Contract Address** on your output, 
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/81f90297-4ed8-4231-b439-d8473dfd9f9b">
+</p>
+
+and paste it on [Etherscan](https://etherscan.io/)
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/cea5b213-4b6a-4c54-8b73-134396fba2cb">
+</p>
+
+Make sure you choose **sepolia testnet** 
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/efcc22a6-ae12-4301-bf81-f5aef14cbd88">
+</p>
+
+Once you searched using your **Contract Address**, you will see as following: 
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/db3ea193-d746-480a-a278-d82c04eda4d1">
+</p>
+
+As you can see at the bottom, it highlights the **contract creation** which is the deployment of your Smart Contract into the Ethereum Network and when the contract is deployed
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/cb6f7fbf-a09b-4e73-b144-2973ee69cc2e">
+</p>
+
+Using Ethereum Explore is a good practice for Decentralized Application as it provide an insight regarding your smart contract deployment, any transaction occurs, block information, as well as to interact with your Web Application.
+
+# Integration With Web Application
+
+## 1. Javascript Object Notation (JSON)
+
+Now I believe you have a new folder names `build/contracts` which contains your `.json` file
+
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/45b22509-9b34-4e40-8d15-e2a5ec4c93c7">
+</p> 
+
+You can see there's a massive line of code there.
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/d3534acf-66c9-4d25-a4b2-9fb35960b399">
+</p> 
+
+
+Here's the thing, whenever you deploy your smart contract on the ethereum network, truffle frameworks will automatically generate a new `json` file.
+
+The more complex and complicated your smart contract, the longer line of code you will get.
+
+This `json` file is really crucial for Web Development integration with our smart contract.
+
+Web Application + Smart Contract = Decentralized Application.
+
+It contains important information about your contract:
+  - Application Binary Interface (ABI)
+  - Contract Address
+
+Okay we've already know that we can use Contract Address to verify our smart contract deployment on Ethereum Explorer.
+
+Well what about **Application Binary Interface (ABI)?**
+
+### Application Binary Interface (ABI)?
+
+ABI is representation of the contract's functions and variables in a format that JavaScript can understand.
+
+Javascript compiler cannot read solidity code, due to that **truffle suite** generate a file that Javascript compiler can read. 
+
+So Javascript will undergo it's fetching method to obtain all of the variables, functions, and etc.
+
+
+
+
+
+ 
+
 
 
  
