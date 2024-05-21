@@ -30,13 +30,15 @@
      - [Why We Need Ethereum Provider](#why-we-need-ethereum-provider)
      - [HDWalletProvider and Dotenv](#hdwalletprovider-and-dotenv)
      - [Register Infura](#register-infura)
-- [Smart Contract Deployment](#smart-contract-deployment)
+- [Smart Contract](#smart-contract)
    - [1. Initialize Our Smart Contract](#1-initialize-our-smart-contract)
      - [What Are The Purpose Of Migration?](#what-are-the-purpose-of-migration)
      - [Migration Explanation](#migration-explanation)
      - [What If You Dont Include Migration?](#what-if-you-dont-include-migration)
    - [2. Initialize Our Script Of Deployment](#2-initialize-our-script-of-deployment)
-     - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder) 
+     - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
+   - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
+- [Deployment Of Smart Contract](#deployment-of-smart-contract)
 
 # Setup Environment
 ## 1. Node JS
@@ -191,7 +193,7 @@ It provides a suite of tools that allow developers to write smart contracts with
         <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/abfb1dd0-ab9d-41c2-9d2c-4f05030a01ae">
       </p>
 
-# Smart Contract Deployment      
+# Smart Contract       
 
 ## 1. Initialize Our Smart Contract
   - Create one file within `Contracts` folder name `Migration.sol`
@@ -273,6 +275,102 @@ It provides a suite of tools that allow developers to write smart contracts with
  The purpose of organising deployment steps into separate migration scripts is to maintain a clear and ordered deployment process.
 
  It ensures that each step is executed only once, avoiding unnecessary redeployments, and it helps in tracking the deployment history.
+
+ ## 3. Completing Smart Contract and Migration
+ `CrowdFunding.sol`
+ ```sol
+  // SPDX-License-Identifier: MIT
+  pragma solidity 0.8.19;
+
+  contract Crowdfunding {
+      address public owner;         // Variable to store the owner of the crowdfunding campaign.
+      uint public goal;             // Variable to store the goal of the crowdfunding campaign.
+      uint public deadline;         // Variable to store the deadline of the crowdfunding campaign.
+      uint public raisedAmount = 0; // Variable to store the total amount raised.
+      mapping(address => uint) public contributions; // Mapping to store the contributions of each address.
+  
+      // Constructor - function that will be called upon contract deployment.
+      constructor(uint _goal, uint _deadlineInMinutes) {
+          owner = msg.sender;
+          goal = _goal;
+          deadline = block.timestamp + (_deadlineInMinutes * 1 minutes); // Set the deadline in minutes.
+      }
+  
+      // Modifier - function to restrict access to a certain function.
+      modifier onlyByOwner{ 
+          require(msg.sender == owner, "Only owner can check raised amount.");
+          _;
+      }
+  
+      // contribute() - Function to contribute to the crowdfunding campaign.
+      function contribute() public payable {
+          require(block.timestamp <= deadline, "The crowdfunding campaign is already over.");
+          require(msg.value > 0, "Contribution amount must be greater than 0");
+          require(raisedAmount + msg.value <= goal, "Goal has already been reached");
+  
+          contributions[msg.sender] += msg.value;
+          raisedAmount += msg.value;
+      }
+  
+      // withdrawFunds() - function to withdraw funds after the deadline has passed and the goal has been reached. 
+      function withdrawFunds() public onlyByOwner{
+          require(block.timestamp > deadline, "The crowdfunding campaign is not over yet.");
+          require(raisedAmount >= goal, "Goal has not been reached yet");
+  
+          payable(owner).transfer(raisedAmount); // Transfer the raised amount to the owner.
+          raisedAmount = 0;
+      }
+  
+      // refund() - function to refund the contributions if the deadline has passed and the goal has not been reached.
+      function refund() public {
+          require(block.timestamp > deadline, "The crowdfunding campaign is not over yet.");
+          require(raisedAmount >= goal, "The crowdfunding campaign was successful.");
+          
+          uint amount = contributions[msg.sender];
+          contributions[msg.sender] = 0;
+          payable(msg.sender).transfer(amount); // Refund the contribution amount to the contributor.
+      }
+  }
+ ```
+ `2_crowdFunding.js`
+ ```js
+  const CrowdFunding = artifacts.require("CrowdFunding");
+  
+  module.exports = function (deployer) {
+    deployer.deploy(CrowdFunding);
+  };
+ ```
+By now i suppose your directory is like this:
+ <p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/4f13a295-2904-4b53-aac6-ab1152436866">
+ </p>
+
+**Remember**, `migration.sol` and `1_migration.js` is compulsory for any smart contract deployment to the Ethereum network. 
+
+You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you want to deploy a smart contract about Election, you may name your smart contract to `Election.sol` and `2_election.js`.
+
+
+# Deployment of Smart Contract
+
+Firstly, we have to compile our smart contract with command:
+```sh
+truffle compile
+```
+This command will compile all of our smart contract in the folder `/contracts`
+
+ <p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/15b93210-51bd-4ccf-a610-c86ae13c421c">
+ </p>
+ 
+Now, we can deploy our smart contract with this command:
+```sh
+truffle migrate
+
+```
+
+
+ 
+
   
 
 
