@@ -1,4 +1,4 @@
-<p align="center">
+![image](https://github.com/alifzwan/web3Lab/assets/63784108/90a41bbc-b9a4-47b0-a07d-3aa0a5c9cbc3)<p align="center">
   <a href="https://nodejs.org/en" target="_blank" rel="noopener noreferrer">
     <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" width="120" height="120"/>
   </a>
@@ -418,7 +418,14 @@ As you can see at the bottom, it highlights the **contract creation** which is t
     <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/cb6f7fbf-a09b-4e73-b144-2973ee69cc2e">
 </p>
 
-Using Ethereum Explore is a good practice for Decentralized Application as it provide an insight regarding your smart contract deployment, any transaction occurs, block information, as well as to interact with your Web Application.
+Using Ethereum Explore is a good practice for Decentralized Application as it provide an insight regarding your smart contract deployment, any transaction occurs, block informations, as well as to interact with your Web Application.
+
+Another method (for me), usually i'll check my `json` file 
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/e18b9b2f-8f6f-4f99-96c5-b898a3008074">
+</p>
+
+within `networks:{}`, you can check your `network_id`, contract address, and transaction hash. If your smart contract is not deployed to Ethereum Network, this information would not appear on our `.json`.
 
 # Integration With Web Application
 
@@ -438,9 +445,9 @@ You can see there's a massive line of code there.
 
 Here's the thing, whenever you deploy your smart contract on the ethereum network, truffle frameworks will automatically generate a new `json` file.
 
-The more complex and complicated your smart contract, the longer line of code you will get.
+The more complex and complicated your Smart Contract, the longer line of code you will get.
 
-This `json` file is really crucial for Web Development integration with our smart contract.
+This `json` file is really crucial for Web Development integration with our Smart Contract.
 
 Web Application + Smart Contract = Decentralized Application.
 
@@ -454,11 +461,11 @@ Well what about **Application Binary Interface (ABI)?**
 
 ### Application Binary Interface (ABI)?
 
-ABI is representation of the contract's functions and variables in a format that JavaScript can understand.
+ABI is a representation of the contract's functions and variables in a format that JavaScript can understand.
 
 Javascript compiler cannot read solidity code, due to that **truffle suite** generate a file that Javascript compiler can read. 
 
-So Javascript will undergo it's fetching method to obtain all of the variables, functions, and etc.
+So Javascript will undergo it's fetching method to obtain all of the variables, functions, and etc by reading the `.json` file to be operate successfully on our Web Application.
 
 
 
