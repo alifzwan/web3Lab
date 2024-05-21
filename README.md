@@ -1,4 +1,4 @@
-![image](https://github.com/alifzwan/web3Lab/assets/63784108/90a41bbc-b9a4-47b0-a07d-3aa0a5c9cbc3)<p align="center">
+<p align="center">
   <a href="https://nodejs.org/en" target="_blank" rel="noopener noreferrer">
     <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" width="120" height="120"/>
   </a>
@@ -39,7 +39,9 @@
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
    - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
 - [Deployment Of Smart Contract](#deployment-of-smart-contract)
-   - [1. Verify Your Deployment On Ethereum Explorer](#1-verify-your-deployment-on-ethereum-explorer)
+   - [1. Fund Your Metamask](#1-fund-your-metamask)
+   - [2. Deploy Smart Contract](#2-deploy-smart-contract)
+   - [3. Verify Your Deployment On Ethereum Explorer](#3-verify-your-deployment-on-ethereum-explorer)
      - [What Is Ethereum Explorer?](#what-is-ethereum-explorer)
 - [Integration With Web Application](#integration-with-web-application)
    - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
@@ -357,10 +359,27 @@ You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you wan
 
 # Deployment of Smart Contract
 
+## 1. Fund Your Metamask
+
+You must firstly fund your metamask using [Ethereum Faucet](https://www.infura.io/faucet/sepolia) 
+
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/bc3309d9-2369-4fa7-b82e-28a440d1a441">
+</p>
+
+Copy your wallet address of your Metamask account 
+
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/3d1cb901-4488-4a73-bb73-12cb37c96277">
+</p>
+
+and you'll get 0.5 ETH. This fund is for testing purposes. Meaning you cannot do any transaction to buy things using it. 
+
+## 2. Deploy Smart Contract
 Firstly, we have to make sure to check compiler's version on our `truffle.config.js`
 
 <p align="center">
-    <img width="500" src="![image](https://github.com/alifzwan/web3Lab/assets/63784108/1c799ff8-f24a-426c-96dc-1b5afd089943)">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/1c799ff8-f24a-426c-96dc-1b5afd089943">
  </p>
 
 **Make Sure** that the version is the same as in your `.sol` file or else you'll catch an error halfway through
@@ -384,7 +403,8 @@ If you're getting this output, congratulations. You just deploy your first ever 
     <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/2c449642-5160-45c1-a691-d2aa31d36b12">
 </p>
 
-## 1. Verify Your Deployment On Ethereum Explorer 
+
+## 3. Verify Your Deployment On Ethereum Explorer 
 
 ### What Is Ethereum Explorer?
 
