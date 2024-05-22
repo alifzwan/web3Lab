@@ -40,11 +40,18 @@
    - [2. Initialize Our Script Of Deployment](#2-initialize-our-script-of-deployment)
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
    - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
-- [Deployment Of Smart Contract](#deployment-of-smart-contract)
+- [Deployment Of Smart Contract (Test Network)](#deployment-of-smart-contract-test-network)
    - [1. Fund Your Metamask](#1-fund-your-metamask)
    - [2. Deploy Smart Contract](#2-deploy-smart-contract)
-   - [3. Verify Your Deployment On Ethereum Explorer](#3-verify-your-deployment-on-ethereum-explorer)
+   - [3. Error During Deployment](#3-error-during-deployment)
+   - [4. Verify Your Deployment On Ethereum Explorer](#4-verify-your-deployment-on-ethereum-explorer)
      - [What Is Ethereum Explorer?](#what-is-ethereum-explorer)
+- [Deployment Of Smart Contract (Ganache)](#deployment-of-smart-contract-ganache)
+  - [1. Setup Ganache](#1-setup-ganache)
+  - [2. Integrate Ganache With Metamask](#2-integrate-ganache-with-metamask)
+    - [Change Hostname](#change-hostname)
+    - [Add Ganache Network To Metamask](#add-ganache-network-to-metamask)
+    - [Importing Ganache Account To Metamask](#importing-ganache-account-to-metamask)
 - [Integration With Web Application](#integration-with-web-application)
    - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
      - [Application Binary Interface (ABI)](#application-binary-interface-abi)
@@ -420,15 +427,19 @@ By now i suppose your directory is like this:
 You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you want to deploy a smart contract about Election, you may name your smart contract to `Election.sol` and `2_election.js`.
 
 
-# Deployment of Smart Contract
+# Deployment of Smart Contract (Test Network)
 
 ## 1. Fund Your Metamask
 
 You must firstly fund your metamask using [Infura Faucet](https://www.infura.io/faucet/sepolia) or [Alchemy Faucet](https://www.alchemy.com/faucets/ethereum-sepolia) 
 
+These two website provides free cryptocurrency to users for testing purposes. You may find another faucet to fund your wallet.
+
+If these two website cannot fund your wallet, you can search for another faucet by typing in google "sepolia testnet faucet"
+
 If you're wallet is 0 ETH, you cannot deploy the Smart Contract as it requires a gas to deploy it to the Ethereum Network.
 
-Before that, change your metamask's network into test network 
+Before that, change your metamask's network into test network:
 
 
 <p align="center">
@@ -439,20 +450,17 @@ Before that, change your metamask's network into test network
     <img width="250" src="https://github.com/alifzwan/web3Lab/assets/63784108/71a8e104-11c6-4764-97e1-a86f8d95e7b0">
 </p> 
 
+Copy your wallet address of your Metamask account 
+
+<p align="center">
+    <img width="250" src="https://github.com/alifzwan/web3Lab/assets/63784108/3d1cb901-4488-4a73-bb73-12cb37c96277">
+</p>
 
 <p align="center">
     <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/bc3309d9-2369-4fa7-b82e-28a440d1a441">
 </p>
 
-Copy your wallet address of your Metamask account 
 
-<p align="center">
-    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/3d1cb901-4488-4a73-bb73-12cb37c96277">
-</p>
-
-and you'll get 0.5 ETH. This fund is for testing purposes. Meaning you cannot do any transaction to buy things using it. 
-
-If those two website cannot fund your wallet, you can search for another faucet by typing in google "sepolia testnet faucet"
 
 ## 2. Deploy Smart Contract
 Firstly, we have to make sure to check compiler's version on our `truffle.config.js`
@@ -482,8 +490,28 @@ If you're getting this output, congratulations. You just deploy your first ever 
     <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/2c449642-5160-45c1-a691-d2aa31d36b12">
 </p>
 
+## 3. Error During Deployment
 
-## 3. Verify Your Deployment On Ethereum Explorer 
+You may come across some error during your deployment and that's okay. Try find a way to solve it.
+
+**TRY THIS WAY OF THINKING**
+
+For example, some of you may have some error stating **insufficient balance** to deploy your Smart Contract.
+
+**Problem:**
+- Insufficient balance
+
+How we gonna solve it?
+
+**Solution:**
+- Add more fund to your wallet. **OR**
+        
+- Reduce complexity of your Smart Contract
+
+The more complex your Smart Contract, the more **gas** it required to deploy.
+
+
+## 4. Verify Your Deployment On Ethereum Explorer 
 
 ### What Is Ethereum Explorer?
 
@@ -525,6 +553,156 @@ Another method (for me), usually i'll check my `json` file
 </p>
 
 within `networks:{}`, you can check your `network_id`, contract address, and transaction hash. If your smart contract is not deployed to Ethereum Network, this information would not appear on our `.json`.
+
+
+# Deployment of Smart Contract (Ganache) 
+
+## 1. Setup Ganache
+
+Download [Ganache](https://archive.trufflesuite.com/ganache/)
+
+Ganache is personal blockchain for Ethereum development that you can use to deploy contracts, develop applications, and run tests.
+
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/8d3114c0-d462-4704-9070-1affc846a1f7">
+</p>
+
+<p align="center">
+    <img width="400" alt="ganache-picture" src="https://github.com/alifzwan/ethers-simple-storage/blob/main/images/ganache-picture.png">
+</p>
+
+
+After you install **Ganache** you may proceed to **Quickstart** 
+<p align="center">
+    <img width="1000" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/b8e4a28c-e4d1-4249-a84e-46b67101f6ff">
+</p>
+
+Alright now you may see a list of **Account** with 100 ETH fund.
+
+This is pretty same with **Metamask** where you have account. 
+
+However, for development purpose i find **Metamask** a hassle since you have to fund your account compare to **Ganache** where you have a 100 ETH funded account.
+
+## 2. Integrate Ganache With Metamask
+
+### Change Hostname 
+
+The hostname in Ganache determines which network interfaces on your machine the Ganache server is accessible from. Depending on your development needs, you might want to change this setting.
+
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/1c7436c3-2469-4f46-acce-4c4bf111b33e">
+</p>
+
+Choose the 192.168.0.10 - Wifi and restart your **Ganache**
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/0acbe946-508a-41b0-8fd7-023691086af3">
+</p>
+
+Now your RPC Server is different
+
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/2882f6ea-c7ba-419c-b44d-5239e8610d0c">
+</p>
+
+Here's what each option means:
+- 0.0.0.0 - All Interfaces: This means Ganache is accessible from any network interface on your machine. This could be useful if you're testing from a different device on the same network, or if you're running a client in a different virtual machine.
+- 192.168.0.10 - Wifi: This is the IP address of your Wifi network interface. If you set this as the hostname, only devices on the same Wifi network can access the Ganache server.
+- 127.0.0.1 - Loopback Pseudo-Interface 1: This is the IP address of the loopback network interface. This means the Ganache server can only be accessed from the same machine it's running on. This is the most secure option, as it doesn't expose the server to the rest of the network.
+- 172.29.176.1 - vEthernet (WSL (Hyper V firewall)): This is the IP address of a virtual Ethernet network interface, likely created by the Windows Subsystem for Linux (WSL) or Hyper-V. If you're running a client in WSL or a Hyper-V virtual machine, you might want to use this option.
+
+
+### Add Ganache Network To Metamask
+
+We can use these account in **Ganache** in **Metamask**. 
+
+First, we have to establish the connection between **Ganache** and **Metamask**.
+
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/3f1c6cd2-b133-4fa8-b091-2284e6fbda05">
+</p>
+
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/b9d9b84e-1840-4c06-8b26-40bf9a5b2013">
+</p>
+
+<p align="center">
+    <img width="500" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/7033656c-4dd0-474e-8b33-bdd734ec8368">
+</p>
+
+<p align="center">
+    <img width="500" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/1b2410ba-4e74-405c-9385-8003450b7071">
+</p>
+
+Add your Network based on this details:
+
+- Network name: Ganache
+- New RPC URL : HTTP://192.168.0.10:7545
+- Chain ID : 1337 
+- Currency symbol: ETH
+
+You may find your RPC URL on your **Ganache** interface
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/2882f6ea-c7ba-419c-b44d-5239e8610d0c">
+</p>
+
+### Importing Ganache Account To Metamask 
+
+By now your **Metamask** already connect with your **Ganache**
+
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/d3e6b715-57d7-4b74-8ac1-567428ef1de6)">
+</p>
+
+Now to import your **Ganache** account your have to click on your account at the top and **add account** 
+
+
+
+
+
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/0ea37b53-24ea-41a5-a41d-6a6b40673fb4">
+</p>
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/c4647623-1582-4663-8392-649b4d5d6d75">
+</p>
+
+Click Import Account
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/92c8fb45-c588-4478-8a7a-1cecb99788f7">
+</p>
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/b37ea73f-7d9a-40e4-ace6-f3e55e710ee3">
+</p>
+
+
+
+Now to get your **Account's Private Key**, open your ganache and copy your private key and paste it.
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/fcc4274b-75df-4ac8-91bd-033d0b9fb249">
+</p>
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/27f361ce-a966-4919-8a3b-e45f3eb70a3f">
+</p>
+
+Now congratulations you already import your **Ganache** account into **Metamask**
+
+<p align="center">
+    <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/375d89fe-a869-4d20-a557-546e0d2b6747">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Integration With Web Application
 
@@ -569,9 +747,10 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
 
 # Programmers Tips
   - Whenever you go through some errors/bugs, you **must** find a way to solve the bug. Don't worry about it, every developer/IT practitioner will go through this.
-  - My way is i will copy the error i run, and paste it to google. Well of course you have to use GPT as well to solve it.
-  - Some of the website i used to solve my errors is [Stack Overflow](https://stackoverflow.com/) and [Ethereum Stack Exchange](https://ethereum.stackexchange.com/)
+  - My way of solving is I will copy the error I run, and paste it to google. Well of course you have to use GPT as well to solve it.
+  - Some of the website i used to solve my errors is [Stack Overflow](https://stackoverflow.com/) and [Ethereum Stack Exchange](https://ethereum.stackexchange.com/) as these two website will publish a solved error that someone has been go through before this.
   - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone could've been a great developer right now. If you only do what you can do, you will never be more than you are.
+  - I promise whenever you solve some error that has been interrupting your development, you will feel some sort of satisfaction. 
 
 
 
