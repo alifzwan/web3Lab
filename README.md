@@ -23,10 +23,12 @@
      - [Node JS Installation](#node-js-installation)
    - [2. Git](#2-git)
      - [Git Installation](#git-installation)
-   - [3. Truffle Suite](#3-truffle-suite)
+   - [3. Visual Studio Code](#3-visual-studio-code)
+     - [Create New Folder](#create-new-folder)
+   - [4. Truffle Suite](#4-truffle-suite)
      - [Truffle Suite Installation](#truffle-suite-installation)
      - [Folder Description](#folder-description)
-   - [4. Alchemy (Ethereum Provider)](#4-alchemy-ethereum-provider)
+   - [5. Alchemy (Ethereum Provider)](#5-alchemy-ethereum-provider)
      - [Why We Need Ethereum Provider](#why-we-need-ethereum-provider)
      - [HDWalletProvider and Dotenv](#hdwalletprovider-and-dotenv)
      - [Register Alchemy](#register-alchemy)
@@ -46,6 +48,7 @@
 - [Integration With Web Application](#integration-with-web-application)
    - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
      - [Application Binary Interface (ABI)](#application-binary-interface-abi)
+- [Programmers Tips](#programmers-tips)
 
 
 # Setup Environment
@@ -79,8 +82,68 @@ Git is a version control system designed to handle everything from small to very
        <p align="center" gap="5">
         <img width="400" alt="Git" src="https://github.com/alifzwan/web3Lab/assets/63784108/a5a2a736-7a09-43fc-8b69-c02b26a9dbf1">
        </p>
+## 3. Visual Studio Code       
+
+Download [Visual Studio Code](https://code.visualstudio.com/) 
+
+
+Visual Studio Code for me is a universal, all in one code editor/IDE that allow developer to build, debug, test, control version, and etc. 
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/eedc7a7e-a238-4ef4-aec5-08c80409a2bf">
+</p>
+
+Now, for starters open your terminal in Visual Studio Code. It's on View -> terminal 
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/49ccd1f7-38f6-4438-8a6e-e2e59d942868">
+</p>
+
+However, my method is just use your keyboard. `ctrl` + `shift` + `backtick`
+
+you can find backtick on the left side of your `1` on your keyboard.
+
+### Create New Folder 
+
+
+Now before we proceed with Truffle Suite Installation, I suggest you to create new folder to store everything within it. 
+
+It's a good practice to have so you could find your project seamlessly and less messy environment.
+
+For Example:
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/fb43ebcc-37f9-4431-a59b-69a16576d55b">
+</p>
+
+Now, if let's say i want to create a new project i will:
+
+  - Open Terminal
+  - Create new folder by typing `mkdir nameOfYourFolder`
+  - Enter that folder by typing `cd nameOfYourFolder`
+  - Open and display it on my VSCode by typing `code .`
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/e1732d56-d929-4dc9-8a5f-532b35d52945">
+</p>
+
+Once you type `code .` and press enter, it'll popup a new windows. 
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/3fb53464-608b-4d7f-b21e-c8c10a272f7a">
+</p>
+
+This newly windows are the Display of your project within `nameOfYourFolder`. 
+
+Everything you build right now will be within this project. 
+
+If you're not implementing this practice, it may be a hassle for you to locate a certain file, folder, and overall development of your project.
+
+
+Now, we can download our Truffle Suite
+
        
-## 3. Truffle Suite
+## 4. Truffle Suite
 Truffle Suite is a development environment, testing framework, and asset pipeline for Ethereum, aiming to make life as an Ethereum developer easier. 
 
 It provides a suite of tools that allow developers to write smart contracts with the Solidity programming language, test them, deploy them, and build decentralized applications (dApps) on top of them.
@@ -114,7 +177,7 @@ It provides a suite of tools that allow developers to write smart contracts with
   - **Test** - This file is for test/debug our smart contract
   - `truffle-config.js` - This file contain our truffle configuration
 
-## 4. Alchemy (Ethereum Provider)
+## 5. Alchemy (Ethereum Provider)
 ### Why we need Ethereum Provider?
    Ethereum is a decentralized platform that runs smart contracts. These smart contracts are executed on all nodes in the Ethereum network.
    To interact with the Ethereum network (i.e., to read from or write to the blockchain), your application needs to connect to an Ethereum node.
@@ -451,7 +514,7 @@ Once you searched using your **Contract Address**, you will see as following:
 
 As you can see at the bottom, it highlights the **contract creation** which is the deployment of your Smart Contract into the Ethereum Network and when the contract is deployed
 <p align="center">
-    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/cb6f7fbf-a09b-4e73-b144-2973ee69cc2e">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/cb6f7fbf-a09b-4e73-b144-2973ee69cc2e">
 </p>
 
 Using Ethereum Explore is a good practice for Decentralized Application as it provide an insight regarding your smart contract deployment, any transaction occurs, block informations, as well as to interact with your Web Application.
@@ -503,6 +566,12 @@ Javascript compiler cannot read solidity code, due to that **truffle suite** gen
 
 So Javascript will undergo it's fetching method to obtain all of the variables, functions, and etc by reading the `.json` file to be operate successfully on our Web Application.
 
+
+# Programmers Tips
+  - Whenever you go through some errors/bugs, you **must** find a way to solve the bug. Don't worry about it, every developer/IT practitioner will go through this.
+  - My way is i will copy the error i run, and paste it to google. Well of course you have to use GPT as well to solve it.
+  - Some of the website i used to solve my errors is [Stack Overflow](https://stackoverflow.com/) and [Ethereum Stack Exchange](https://ethereum.stackexchange.com/)
+  - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone could've been a great developer right now. If you only do what you can do, you will never be more than you are.
 
 
 
