@@ -48,7 +48,7 @@
    - [2. Initialize Our Script Of Deployment](#2-initialize-our-script-of-deployment)
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
    - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
-- [Deployment Of Smart Contract (Test Network)](#deployment-of-smart-contract-test-network)
+- [Deployment Of Smart Contract (Ethereum)](#deployment-of-smart-contract-ethereum)
    - [1. Fund Your Metamask](#1-fund-your-metamask)
    - [2. Deploy Smart Contract](#2-deploy-smart-contract)
    - [3. Error During Deployment](#3-error-during-deployment)
@@ -441,7 +441,7 @@ By now i suppose your directory is like this:
 You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you want to deploy a smart contract about Election, you may name your smart contract to `Election.sol` and `2_election.js`.
 
 
-# Deployment of Smart Contract (Test Network)
+# Deployment of Smart Contract (Ethereum)
 
 ## 1. Fund Your Metamask
 
