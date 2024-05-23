@@ -822,7 +822,7 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
   - Whenever you go through some errors/bugs, you **must** find a way to solve the bug. Don't worry about it, every developer/IT practitioner will go through this.
   - My way of solving is I will copy the error I run, and paste it to google. Well of course you have to use GPT as well to solve it.
   - Some of the website i used to solve my errors is [Stack Overflow](https://stackoverflow.com/) and [Ethereum Stack Exchange](https://ethereum.stackexchange.com/) as these two website will publish a solved error that someone has been go through before this.
-  - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone could've been a great developer right now. If you only do what you can do, you will never be more than you are.
+  - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone would've been a great developer right now. If you only do what you can do, you will never be more than you are.
   - I promise whenever you solve some error that has been interrupting your development, you will feel some sort of satisfaction. 
 
 
