@@ -52,6 +52,7 @@
     - [Change Hostname](#change-hostname)
     - [Add Ganache Network To Metamask](#add-ganache-network-to-metamask)
     - [Importing Ganache Account To Metamask](#importing-ganache-account-to-metamask)
+    - [Refactoring Truffle Configuration](#refactoring-truffle-configuration)
 - [Integration With Web Application](#integration-with-web-application)
    - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
      - [Application Binary Interface (ABI)](#application-binary-interface-abi)
@@ -656,9 +657,6 @@ By now your **Metamask** already connect with your **Ganache**
 Now to import your **Ganache** account your have to click on your account at the top and **add account** 
 
 
-
-
-
 <p align="center">
     <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/0ea37b53-24ea-41a5-a41d-6a6b40673fb4">
 </p>
@@ -667,9 +665,11 @@ Now to import your **Ganache** account your have to click on your account at the
 </p>
 
 Click Import Account
+
 <p align="center">
     <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/92c8fb45-c588-4478-8a7a-1cecb99788f7">
 </p>
+
 <p align="center">
     <img width="250" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/b37ea73f-7d9a-40e4-ace6-f3e55e710ee3">
 </p>
@@ -692,15 +692,68 @@ Now congratulations you already import your **Ganache** account into **Metamask*
 
 
 
+### Refactoring Truffle Configuration
+
+Open your `truffle.config.js` and uncomment this part of code:
+
+<p align="center">
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/8023e32e-7956-4a18-a573-e4d0b3ff9f12">
+</p>
+
+Change this section according to setting on **Ganache**:
+
+<p align="center"> 
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/0c28b692-f164-418e-8554-4473def018dd">
+</p>
+
+<p align="center"> 
+    <img width="800" alt="ganache-picture" src="https://github.com/alifzwan/web3Lab/assets/63784108/e3034f69-05ed-4f19-9fe0-02959a4b6dd2">
+</p>
 
 
+## 3. Deploy Smart Contract
 
+After refactoring your configuration file, you can proceed with compile and deployment of your smart contract.
 
+**Compile:**
+```sh
+truffle compile --reset
+```
+This command will compile all of our smart contract in the folder `/contracts`
 
+ <p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/15b93210-51bd-4ccf-a610-c86ae13c421c">
+ </p>
 
+**Deploy:**
+```sh
+truffle migrate --network ganache --reset
+```
+ <p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/36615ef5-4da5-41c4-9bed-1f83a6b1042e">
+ </p>
 
+### Verify Deployment On Ganache 
 
+To check whether your smart contract is already deployed is on the **Blocks** section
 
+**Blocks** shows each block as mined on the blockchain, along with gas used and transactions.
+
+ <p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/aad47b79-3c8b-47a9-bb24-04f6a3bfc5ac">
+ </p>
+
+ Here's a breakdown of what those blocks might represent:
+ 
+- **Initialize Block**: The first block which often referred as **genesis block** or **Block 0**. This block doesn't contain any transactions (since you haven't deployed any contracts or made any transactions yet), but it's necessary to initialize the blockchain. All subsequent blocks (which will contain your transactions) will link back to this block.
+  
+- **Migrations Contract Deployment**: The first transaction is usually the deployment of the Migrations contract. Truffle uses this contract to keep track of which migrations have been run. The contract is deployed only once, when you run your migrations for the first time.
+
+- **Migrations Contract Update**: After the Migrations contract is deployed, Truffle records that the first migration (the deployment of the Migrations contract itself) has been completed. It does this by calling a function on the Migrations contract, which creates a transaction.
+
+- **Your Contract Deployment**: The next transaction is the deployment of your actual contract. This is the contract you've written and are deploying with your second migration script.
+
+- **Migrations Contract Update**: After your contract is deployed, Truffle records that the second migration has been completed. Again, it does this by calling a function on the Migrations contract, which creates another transaction.
 
 
 
