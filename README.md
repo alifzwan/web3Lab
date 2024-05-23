@@ -44,8 +44,9 @@
    - [1. Fund Your Metamask](#1-fund-your-metamask)
    - [2. Deploy Smart Contract](#2-deploy-smart-contract)
    - [3. Error During Deployment](#3-error-during-deployment)
-   - [4. Verify Your Deployment On Ethereum Explorer](#4-verify-your-deployment-on-ethereum-explorer)
-     - [What Is Ethereum Explorer?](#what-is-ethereum-explorer)
+   - [4. Verify Smart Contract Deployment](#4-verify-smart-contract-deployment)
+     - [Ethereum Explorer](#ethereum-explorer)
+     - [Javascript Object Notation (JSON)](#javascript-object-notation-json)
 - [Deployment Of Smart Contract (Ganache)](#deployment-of-smart-contract-ganache)
   - [1. Setup Ganache](#1-setup-ganache)
   - [2. Integrate Ganache With Metamask](#2-integrate-ganache-with-metamask)
@@ -53,6 +54,10 @@
     - [Add Ganache Network To Metamask](#add-ganache-network-to-metamask)
     - [Importing Ganache Account To Metamask](#importing-ganache-account-to-metamask)
     - [Refactoring Truffle Configuration](#refactoring-truffle-configuration)
+  - [3. Deploy Smart Contract](#3-deploy-smart-contract)
+  - [4. Verify Smart Contract Deployment](#4-verify-smart-contract-deployment)
+    - [Ganache](#ganache)
+    - [Javascript Object Notation (JSON)](#javascript-object-notation-json) 
 - [Integration With Web Application](#integration-with-web-application)
    - [1. Javascript Object Notation (JSON)](#1-javascript-object-notation-json)
      - [Application Binary Interface (ABI)](#application-binary-interface-abi)
@@ -512,9 +517,11 @@ How we gonna solve it?
 The more complex your Smart Contract, the more **gas** it required to deploy.
 
 
-## 4. Verify Your Deployment On Ethereum Explorer 
+## 4. Verify Smart Contract Deployment  
 
-### What Is Ethereum Explorer?
+### Ethereum Explorer
+
+**What Is Ethereum Explorer?**
 
 Ethereum explorer, also known as a blockchain explorer, is a tool that allows you to explore the Ethereum blockchain. It provides a user-friendly way to view and analyze the transactions, blocks, and addresses that make up the blockchain.
 
@@ -547,6 +554,8 @@ As you can see at the bottom, it highlights the **contract creation** which is t
 </p>
 
 Using Ethereum Explore is a good practice for Decentralized Application as it provide an insight regarding your smart contract deployment, any transaction occurs, block informations, as well as to interact with your Web Application.
+
+## Javascript Object Notation (JSON)
 
 Another method (for me), usually i'll check my `json` file 
 <p align="center">
@@ -733,7 +742,9 @@ truffle migrate --network ganache --reset
     <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/36615ef5-4da5-41c4-9bed-1f83a6b1042e">
  </p>
 
-### Verify Deployment On Ganache 
+## 4. Verify Smart Contract Deployment 
+
+## Ganache
 
 To check whether your smart contract is already deployed is on the **Blocks** section
 
@@ -745,15 +756,24 @@ To check whether your smart contract is already deployed is on the **Blocks** se
 
  Here's a breakdown of what those blocks might represent:
  
-- **Initialize Block**: The first block which often referred as **genesis block** or **Block 0**. This block doesn't contain any transactions (since you haven't deployed any contracts or made any transactions yet), but it's necessary to initialize the blockchain. All subsequent blocks (which will contain your transactions) will link back to this block.
+- **Initialize Block (Block 0)**: The first block which often referred as **genesis block** or **Block 0**. This block doesn't contain any transactions (since you haven't deployed any contracts or made any transactions yet), but it's necessary to initialize the blockchain. All subsequent blocks (which will contain your transactions) will link back to this block.
   
-- **Migrations Contract Deployment**: The first transaction is usually the deployment of the Migrations contract. Truffle uses this contract to keep track of which migrations have been run. The contract is deployed only once, when you run your migrations for the first time.
+- **Migrations Contract Deployment (Block 1)**: The first transaction is usually the deployment of the Migrations contract. Truffle uses this contract to keep track of which migrations have been run. The contract is deployed only once, when you run your migrations for the first time.
 
-- **Migrations Contract Update**: After the Migrations contract is deployed, Truffle records that the first migration (the deployment of the Migrations contract itself) has been completed. It does this by calling a function on the Migrations contract, which creates a transaction.
+- **Migrations Contract Update (Block 2)**: After the Migrations contract is deployed, Truffle records that the first migration (the deployment of the Migrations contract itself) has been completed. It does this by calling a function on the Migrations contract, which creates a transaction.
 
-- **Your Contract Deployment**: The next transaction is the deployment of your actual contract. This is the contract you've written and are deploying with your second migration script.
+- **Your Contract Deployment (Block 3)**: The next transaction is the deployment of your actual contract. This is the contract you've written and are deploying with your second migration script.
 
-- **Migrations Contract Update**: After your contract is deployed, Truffle records that the second migration has been completed. Again, it does this by calling a function on the Migrations contract, which creates another transaction.
+- **Migrations Contract Update (Block 4)**: After your contract is deployed, Truffle records that the second migration has been completed. Again, it does this by calling a function on the Migrations contract, which creates another transaction.
+
+## Javascript Object Notation (JSON)
+
+Another method (for me), usually i'll check my `json` file 
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/18678e13-4a15-4247-af81-8f900d191aa1">
+</p>
+
+within `networks:{}`, you can check your `network_id`, contract address, and transaction hash. If your smart contract is not deployed to Ganache Network, this information would not appear on our `.json`.
 
 
 
