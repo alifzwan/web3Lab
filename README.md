@@ -11,11 +11,19 @@
   <a href="https://ethereum.org/en/developers/docs/" target="_blank" rel="noopener noreferrer">
     <img src="https://seeklogo.com/images/E/ethereum-logo-DE26DD608D-seeklogo.com.png" width="90" height='120'>
   </a>
+  <a href="https://trufflesuite.com/docs/ganache/" target="_blank" rel="noopener noreferrer">
+    <img src="https://seeklogo.com/images/G/ganache-logo-1EB72084A8-seeklogo.com.png" width="120" height='120'>
+  </a>
 </p>
 
 <h1 align="center">   
   Decentralized Application: Web 3
 </h1> 
+
+<h2 align="center">   
+  CNS4505: Blockchain
+</h2> 
+
 
 ## Table of Contents
 - [Setup Environment](#setup-environment)
@@ -40,7 +48,7 @@
    - [2. Initialize Our Script Of Deployment](#2-initialize-our-script-of-deployment)
      - [What Is The Purpose Of Migrations Folder?](#what-is-the-purpose-of-migrations-folder)
    - [3. Completing Smart Contract and Migration](#3-completing-smart-contract-and-migration)
-- [Deployment Of Smart Contract (Test Network)](#deployment-of-smart-contract-test-network)
+- [Deployment Of Smart Contract (Ethereum)](#deployment-of-smart-contract-ethereum)
    - [1. Fund Your Metamask](#1-fund-your-metamask)
    - [2. Deploy Smart Contract](#2-deploy-smart-contract)
    - [3. Error During Deployment](#3-error-during-deployment)
@@ -433,7 +441,7 @@ By now i suppose your directory is like this:
 You may change `CrowdFunding.sol` and `2_crowdFunding.js` for example if you want to deploy a smart contract about Election, you may name your smart contract to `Election.sol` and `2_election.js`.
 
 
-# Deployment of Smart Contract (Test Network)
+# Deployment of Smart Contract (Ethereum)
 
 ## 1. Fund Your Metamask
 
