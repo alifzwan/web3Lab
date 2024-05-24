@@ -17,7 +17,7 @@
 </p>
 
 <h1 align="center">   
-  Decentralized Application: Web 3
+  Smart Contract: Web 3
 </h1> 
 
 <h2 align="center">   
@@ -831,7 +831,184 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
   - My way of solving is I will copy the error I run, and paste it to google. Well of course you have to use GPT as well to solve it.
   - Some of the website i used to solve my errors is [Stack Overflow](https://stackoverflow.com/) and [Ethereum Stack Exchange](https://ethereum.stackexchange.com/) as these two website will publish a solved error that someone has been go through before this.
   - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone would've been a great developer right now. If you only do what you can do, you will never be more than you are.
-  - I promise whenever you solve some error that has been interrupting your development, you will feel some sort of satisfaction. 
+  - I promise whenever you solve some error that has been interrupting your development, you will feel some sort of satisfaction.
+
+<p></p>
+
+
+<p align="center">
+  <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">
+    <img src="https://seeklogo.com/images/R/react-logo-7B3CE81517-seeklogo.com.png" width="120" height="120"/>
+  </a>
+  <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer">
+    <img src="https://seeklogo.com/images/V/vite-logo-BFD4283991-seeklogo.com.png" width="120" height='120'>
+  </a>
+  <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer">
+    <img src="https://seeklogo.com/images/W/web3js-logo-62DEE79B50-seeklogo.com.png" width="120" height='120'>
+  </a>
+</p>
+
+<h1 align="center">   
+  Decentralized Application: Web 3
+</h1> 
+
+## Table of Contents
+
+- [Responsive Web Design](#responsive-web-design)
+   - [1. React JS](1-react-js)
+     - [What is React JS?](#what-is-react-js)
+     - [Why use React JS on Decentralized Application?](#why-use-react-js-on-decentralized-application)
+   - [2. Vite](#2-vite)
+- [Setup Environment](#setup-environment)
+   - [1. Installation](#1-installation)
+      - [React JS and Vite](#react-js-and-vite) 
+    
+
+# Responsive Web Design
+
+So in this section i'm just gonna explain some frameworks we use to build a Decentralized Application (DApps).
+
+**Smart Contract (Back-End) + React JS (Front-End) = Decentralized Application (DApps)**
+
+## 1. React JS
+
+  Now we venturing a framework that are used to build a responsive web design. 
+
+  I'm really sure that every one of you may heard **React JS** as it is the most popular Javascript framework in the world and is used by many well-known companies, such as Netflix, Maybank2u (MAE), Instagram, and etc.
+
+  If you're interested to be a Front-End Developer/ Full-Stack Developer, then this frameworks is the one you have to master. 
+
+ ### What is React JS? 
+
+ **React JS** is a Javascript library that allow developer to build user interface. It's foundation is based on the concept of components, which are piece of code that are reusable throughout your project.
+
+ Think of **components** as the building blocks of your app, they're like little chunks of code that you can reuse throughout your project. 
+
+ Need a button, a form, or a navigation bar? Each one can be a component!
+
+ **Here's a little taste of what a React component looks like:**
+ ```jsx
+  import React from 'react';
+  
+  function HelloWorld(props) {
+    return (
+      <div>
+        Hello, {props.name}!
+      </div>
+    );
+  }
+  
+  // To use it in your app
+  <HelloWorld name="John Doe" />
+ ```
+
+ Now this is what we call JSX. 
+ 
+ **JSX** is a syntax extension for Javascript that let you write your HTML code and Javascript code logic all in one place. 
+
+ All of React JS file is in `.jsx` file format.
+
+ ### Why use React JS on Decentralized Application?
+
+ Alright you must wondering why we can't use other framework and programming language other than React JS and Javascript right?
+
+ Maybe you wanna use Flask, Python's famous frameworks used to build user interface as well. 
+
+ **Here's my take on why i use React JS compare to other frameworks:**
+
+ - **Javascript Ecosystem**: Solidity, has a syntax that is somewhat similar to Javascript. This makes Javascript a prominent choice for Ethereum Developer. Plus, the Javascript ecosystem offers several libraries to interact with the blockchain, like Web3 JS and Ethers JS.
+   
+ - **Component-Based Architecture**: As i mentioned before, React is based on the concept of components, which are piece of code that are reusable throughout your project. It is a great fit for DApps. Each components can manage its own logic and state to interact with complex blockchain data.
+   
+ - **Strong Community and Ecosystem**: Since React JS is the most popular framework to build user interface, the community is gigantic as well, which means it's easy for you to find help and resources.
+
+
+However, my most prominent reason is the **Demand of Skills**. React JS is the most famous framework to build UI. Which means most company integrate this framework in their system. Hence, this skills is demanding in the market. Not only in Malaysia, but worldwide. You master React, you'll be wanted universally.
+
+## 2. Vite 
+
+Vite, simply said is a build tool and development server. It can be used by any frameworks or no frameworks at all (Vanilla).
+
+However, it is recommended to integrate your project with the React-Powered Frameworks. 
+
+**The reason i chose this build tool:**
+- It swiftly fast 
+- It provide a templates for starting React projects.
+- Easy for documentation and alteration.
+
+
+Even React official documentation state this:
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/3cef6ca0-471c-46fa-968c-51b20c4fca55">
+</p> 
+
+You may use Next JS if you want, but since we don't need to build a server-site rendering or simply said all of the Back-End configuration since we already have our Back-End (Smart Contract). Next JS is like all in one Front-End + Back-End. However, if you want to build only Front-End, i suggest you use Vite.
+
+
+# Setup Environment
+
+## 1. Installation
+
+### React JS and Vite
+
+To use React in Vite, you have to create a react application
+
+Here's a code snippet:
+```sh
+npm create vite@latest
+```
+
+Configure your project like this: 
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/c3264b6d-9992-472f-a370-dd992744c175">
+</p> 
+
+For the `Project name` you may name it with anything you want but for me personally i always name it as `client` to indicate that it is on the client-side.
+
+Now, i believe you have a new generated folder on your directory
+<p align="center">
+    <img width="500" src="https://github.com/alifzwan/web3Lab/assets/63784108/685da1df-ed76-465e-9594-eb5beee249f0">
+</p> 
+
+This folder contains all of Front-End file. So in order to make a change (Download dependencies / run application), you have to access the folder first.
+
+You can do so with this command:
+```sh
+cd yourFolderName
+```
+
+**So let's first download all of dependencies**
+```sh
+npm install
+```
+
+After download all of dependencies, you can run your React Application
+```sh
+npm run dev
+```
+Your VSCode will display a notification like this:
+<p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/21ca9ee0-fc94-4e25-b120-ae6d4a9ec132">
+</p> 
+
+press `Open in Browser` and it will redirect you to your browser:
+<p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/21f022e3-5a4f-4371-8fbd-f75869887467">
+</p> 
+
+and Congratulations, you just created your first ever React Application.
+
+
+
+
+
+
+
+ 
+
+ 
+
+ 
 
 
 
