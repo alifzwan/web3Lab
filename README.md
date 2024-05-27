@@ -365,7 +365,7 @@ It provides a suite of tools that allow developers to write smart contracts with
 
  **Example script name**:
  - 1_initial_migration.js  -  This script deploys the `Migrations.sol` contract, initializing the migration system.
- - 2_crowdFunding.js       -  This script would deploy the next contract in the deployment order.
+ - 2_election.js       -  This script would deploy the next contract in the deployment order.
  - 3_add_functionality.js  -  Another script that might deploy a contract or add functionality to existing contracts.
 
  The purpose of organising deployment steps into separate migration scripts is to maintain a clear and ordered deployment process.
@@ -373,62 +373,74 @@ It provides a suite of tools that allow developers to write smart contracts with
  It ensures that each step is executed only once, avoiding unnecessary redeployments, and it helps in tracking the deployment history.
 
  ## 3. Completing Smart Contract and Migration
- `CrowdFunding.sol`
+ `Election.sol`
  ```sol
   // SPDX-License-Identifier: MIT
-  pragma solidity 0.8.19;
-
-  contract CrowdFunding {
-      address public owner;         // Variable to store the owner of the crowdfunding campaign.
-      uint public goal;             // Variable to store the goal of the crowdfunding campaign.
-      uint public raisedAmount = 0; // Variable to store the total amount raised.
-      mapping(address => uint) public contributions; // Mapping to store the contributions of each address.
-
-      // Constructor - function that will be called upon contract deployment.
-      constructor(uint _goal) {
-          owner = msg.sender;
-          goal = _goal;
-      }
-
-      // Modifier - function to restrict access to a certain function.
-      modifier onlyByOwner{ 
-          require(msg.sender == owner, "Only owner can check raised amount.");
-          _;
-      }
-
-      // contribute() - Function to contribute to the crowdfunding campaign.
-      function contribute() public payable {
-          require(msg.value > 0, "Contribution amount must be greater than 0");
-          require(raisedAmount + msg.value <= goal, "Goal has already been reached");
-
-          contributions[msg.sender] += msg.value;
-          raisedAmount += msg.value;
-      }
-
-      // withdrawFunds() - function to withdraw funds after the deadline has passed and the goal has been reached. 
-      function withdrawFunds() public onlyByOwner{
-          require(raisedAmount >= goal, "Goal has not been reached yet");
-
-          payable(owner).transfer(raisedAmount); // Transfer the raised amount to the owner.
-          raisedAmount = 0;
-      }
-
-      // refund() - function to refund the contributions if the deadline has passed and the goal has not been reached.
-      function refund() public {
-          require(raisedAmount > goal, "The crowdfunding campaign was successful.");
-        
-          uint amount = contributions[msg.sender];
-          contributions[msg.sender] = 0;
-          payable(msg.sender).transfer(amount); // Refund the contribution amount to the contributor.
-      }
-  }
+    pragma solidity 0.8.19;
+    
+    contract Election {
+        address public electionLeader;
+        uint256 public candidatesCount = 0;
+    
+    
+        constructor(){
+            electionLeader = msg.sender; // electionLeader is the one who deploy the contract
+        }
+    
+        modifier onlyByElectionLeader{ // Modifier to restrict access to certain functions in the contract
+            require(msg.sender == electionLeader, "Only election leader can register voters.");
+            _;
+        }
+    
+        struct Voter {
+            bool voted;   // To track if a voter has voted
+            uint256 vote; // To store the vote cast by the voter
+        }
+        mapping(address => Voter) public voters; // Mapping to store the voter details
+    
+    
+        struct Candidate {
+            string name;       // Name of the candidate
+            uint256 voteCount; // Number of votes the candidate has received
+        }
+    
+        Candidate[] public candidates; // Array to store the candidates
+    
+        function addCandidate(string memory _name) public onlyByElectionLeader{
+            candidatesCount++;
+            candidates.push(Candidate(_name, 0));
+        }
+    
+    
+        function registerVoters(address _voter) public onlyByElectionLeader{
+            voters[_voter].voted = false;
+        }
+    
+        function castVote(uint256 _candidateIndex) public {
+            require(!voters[msg.sender].voted, "You have already voted.");
+            require(candidatesCount > 0, "Invalid candidate index.");
+            voters[msg.sender].voted = true;
+            voters[msg.sender].vote = _candidateIndex;
+            candidates[_candidateIndex].voteCount += 1;
+        }
+    
+       function winningCandidate() public view returns (string memory winnerName) {
+            uint256 winningVoteCount = 0;
+            for (uint256 i = 0; i < candidates.length; i++) {
+                if (candidates[i].voteCount > winningVoteCount) {
+                    winningVoteCount = candidates[i].voteCount;
+                    winnerName = candidates[i].name;
+                }
+            }
+        }
+    }
  ```
- `2_crowdFunding.js`
+ `2_election.js`
  ```js
-  const CrowdFunding = artifacts.require("CrowdFunding");
+  const Election = artifacts.require("Election");
   
   module.exports = function (deployer) {
-    deployer.deploy(CrowdFunding, 200);
+    deployer.deploy(Election);
   };
  ```
 By now i suppose your directory is like this:
@@ -861,8 +873,24 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
    - [2. Vite](#2-vite)
 - [Setup Environment](#setup-environment)
    - [1. Installation](#1-installation)
-      - [React JS and Vite](#react-js-and-vite) 
-    
+      - [React JS and Vite](#react-js-and-vite)
+- [Web Development](#web-development)
+   - [1. Initialize User Interface](#1-initialize-user-interface)
+   - [2. Connecting Front End with Smart Contract](#2-connecting-front-end-with-smart-contract)
+     - [Web3 JS](#web3-js)
+     - [Smart Contract Directory](#smart-contract-directory)
+     - [Refactor Our Application](#refactor-our-application)
+     - [Explanation](#explanation)
+       - [Import dependencies and file](#import-dependencies-and-file)
+       - [useState](#usestate)
+       - [useEffect](#useeffect)
+       - [loadWeb3](#loadweb3)
+       - [loadBlockchainData](#loadblockchaindata)
+       - [addCandidate](#addcandidate)
+       - [registerVoter](#registervoter)
+       - [castVote](#castvote)
+       - [getWinningCandidate](#getwinningcandidate)
+       
 
 # Responsive Web Design
 
@@ -997,6 +1025,697 @@ press `Open in Browser` and it will redirect you to your browser:
 </p> 
 
 and Congratulations, you just created your first ever React Application.
+
+# Web Development
+## 1. Initialize User Interface
+
+We're not gonna go in-depth on Web Development but i suggest you do some self learning on [React JS](https://react.dev/). 
+
+Let's first initialize our `App.jsx`:
+```js
+import React from 'react';
+
+
+const App = () => {
+    return (
+        <div>
+            <h1>Election DApp</h1>
+
+            <div>
+                <div>
+                    <b>Current Account:</b> 
+                    <b>Election Leader: </b> 
+                </div>
+                <h2>Candidates</h2>
+                <ul>
+                    <li>Name of Candidate </li>
+                </ul>
+            </div>
+
+            <div>
+                <div>
+                    <h3>Add Candidate</h3>
+                    <input type="text"placeholder="Candidate Name"/>
+                    <button >
+                        Add Candidate
+                    </button>
+                </div>
+
+                <div>
+                    <h3>Register Voter</h3>
+                    <input type="text" placeholder="Voter Address"
+                    />
+                    <button>Register Voter</button>
+                </div>
+
+                <div>
+                    <h3>Cast Vote</h3>
+                    <input type="number" placeholder="Candidate Index"
+                    />
+                    <button>Vote</button>
+                </div>
+            </div>
+
+            <div>
+                <h3>Winning Candidate</h3>
+                <button>Get Winning Candidate</button>
+                <p></p>
+            </div>
+        </div>
+    );
+}
+
+export default App;
+
+
+```
+
+You may run this code and display this interface using this command:
+```
+npm run dev
+```
+<p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/c029eee8-012b-4137-8319-71f56043ccbe">
+</p> 
+
+Now let's add some styles on our interface but first you may install on our dependencies [Sass](https://sass-lang.com/)
+```sh
+npm install sass
+```
+After you install sass, we can proceed with styling our interface:
+`App.jsx`:
+```js
+import React from 'react';
+import './App.scss';
+
+const App = () => {
+    return (
+        <div className="main-container">
+
+            <h1 className="title">Election DApp</h1>
+
+            <div className="main-content">
+                <div className="account">
+                    <b>Current Account:</b> 
+                    <b>Election Leader: </b> 
+                </div>
+                <h2>Candidates</h2>
+                <ul>
+                    <li>Name of Candidate </li>
+                </ul>
+            </div>
+
+            <div className="main-process">
+                <div className="reg-candidate">
+                    <h3>Add Candidate</h3>
+                    <input
+                        type="text"
+                        placeholder="Candidate Name"
+                    />
+                    <button className="button">
+                        Add Candidate
+                    </button>
+                </div>
+
+                <div className="reg-voter">
+                    <h3>Register Voter</h3>
+                    <input
+                        type="text"
+                        placeholder="Voter Address"
+                    />
+                    <button className="button">Register Voter</button>
+                </div>
+
+                <div className="cast-vote">
+                    <h3>Cast Vote</h3>
+                    <input
+                        type="number"
+                        placeholder="Candidate Index"
+                    />
+                    <button className="button">Vote</button>
+                </div>
+            </div>
+
+            <div className="winning-candidate">
+                <h3>Winning Candidate</h3>
+                <button>Get Winning Candidate</button>
+                <p></p>
+            </div>
+        </div>
+    );
+}
+
+export default App;
+```
+`App.scss`:
+```scss
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    height: 90vh;
+    width: 98vw;
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .main-content {
+        .account {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .main-process {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+
+        .reg-candidate {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            padding: 10px;
+            gap: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+            .text {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .button {
+                border-radius: 8px;
+                border: 1px solid transparent;
+                padding: 0.6em 1.2em;
+                font-size: 1em;
+                font-weight: 500;
+                font-family: inherit;
+                background-color: #1a1a1a;
+                cursor: pointer;
+                transition: border-color 0.25s;
+            }
+        }
+        .reg-voter {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+            .text {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .button {
+                border-radius: 8px;
+                border: 1px solid transparent;
+                padding: 0.6em 1.2em;
+                font-size: 1em;
+                font-weight: 500;
+                font-family: inherit;
+                background-color: #1a1a1a;
+                cursor: pointer;
+                transition: border-color 0.25s;
+            }
+        }
+
+        .cast-vote {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+
+            align-items: center;
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+            .text {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .button {
+                border-radius: 8px;
+                border: 1px solid transparent;
+                padding: 0.6em 1.2em;
+                font-size: 1em;
+                font-weight: 500;
+                font-family: inherit;
+                background-color: #1a1a1a;
+                cursor: pointer;
+                transition: border-color 0.25s;
+            }
+        }
+
+    }
+
+    .winning-candidate {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 50px;
+        }
+
+        .text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
+```
+
+Now your interface will look like this:
+<p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/a8c6dddf-0bbb-44ca-b830-79db2a5323f7">
+</p> 
+
+Cool right? 
+
+You may adjust your styling depending on your preferences. This is where coding + creativity comes in. 
+
+## 2. Connecting Front End with Smart Contract
+
+### Web3 JS
+
+[Web3 JS](https://web3js.readthedocs.io/en/v1.10.0/) is a collection of libraries that allow you to interact with a local or remote Ethereum node using HTTP, IPC, or WebSocket.
+
+It's the Ethereum compatible JavaScript API which implements the Generic JSON RPC spec.
+
+We use this library to connect our Interface with our Smart Contract.
+
+### Smart Contract Directory
+
+Remember we store our smart contract `json` file?
+
+it's in `build/contracts`. However, we're gonna need this `json` file to interact with our Smart Contract.
+
+So let's update our `truffle.config.js` 
+
+<p align="center">
+    <img width="800" src="https://github.com/alifzwan/web3Lab/assets/63784108/364294f7-d6a5-44eb-990f-0f776cfd1b55">
+</p> 
+
+with this line of code, after we deploy our smart contract, it'll automatically generate the file on `./client/src/artifacts` which `./client` is our front-end folder hence we can interact with it on our interface.
+
+
+
+### Refactor Our Application
+
+Now this is the most prominent and difficult part.
+
+Connecting your interface with your smart contract require a very attentive detail and changes you made.
+
+However, let me paste the code first and explain later on.
+
+`App.jsx`
+```js
+import React, { useState, useEffect } from 'react';
+import Web3 from "web3";
+import ElectionABI from "/src/artifacts/Election.json";
+import './App.scss';
+
+const App = () => {
+    const [account, setAccount] = useState('');
+    const [loader, setLoader] = useState(true);
+    const [election, setElection] = useState(null);
+
+    const [electionLeader, setElectionLeader] = useState('');
+    const [candidates, setCandidates] = useState([]);
+    const [newCandidateName, setNewCandidateName] = useState('');
+    const [voterAddress, setVoterAddress] = useState('');
+    const [selectedCandidate, setSelectedCandidate] = useState('');
+    const [winnerName, setWinnerName] = useState('');
+
+    useEffect(() => {
+        loadWeb3();
+        loadBlockchainData();
+    }, []);
+
+    const loadWeb3 = async () => {
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+        } else {
+            window.alert(
+                "Non-Ethereum browser detected. You should consider trying MetaMask!"
+            );
+        }
+    };
+
+    const loadBlockchainData = async () => {
+        setLoader(true);
+        const web3 = new Web3(window.ethereum);
+        const accounts = await web3.eth.getAccounts();
+        setAccount(accounts[0]);
+
+        const networkId = await web3.eth.net.getId();
+        const networkData = ElectionABI.networks[networkId];
+
+        if (networkData) {
+            const election = new web3.eth.Contract(ElectionABI.abi, networkData.address);
+            setElection(election);
+
+            const leader = await election.methods.electionLeader().call();
+            setElectionLeader(leader);
+
+            const candidateCount = await election.methods.candidatesCount().call()
+            const candidatesList = [];
+            for (let i = 0; i < candidateCount; i++) {
+                const candidate = await election.methods.candidates(i).call();
+                candidatesList.push(candidate);
+            }
+            console.log("Candidates:", candidatesList); // Debugging log
+            setCandidates(candidatesList);
+            setLoader(false);
+        } else {
+            window.alert('The smart contract is not deployed to current network');
+        }
+    };
+
+    const addCandidate = async () => {
+        await election.methods.addCandidate(newCandidateName).send({ from: account });
+        setNewCandidateName('');
+        loadBlockchainData();
+    };
+
+    const registerVoter = async () => {
+        await election.methods.registerVoters(voterAddress).send({ from: account });
+        setVoterAddress('');
+        alert('Voter registered successfully');
+    };
+
+    const castVote = async () => {
+        await election.methods.castVote(selectedCandidate).send({ from: account });
+        setSelectedCandidate('');
+        alert('Vote cast successfully');
+        loadBlockchainData();
+    };
+
+    const getWinningCandidate = async () => {
+        const name = await election.methods.winningCandidate().call();
+        setWinnerName(name);
+        console.log("Winning Candidate:", name); // Debugging log
+    };
+
+    if (loader) {
+        return (
+            <div>
+                Loading....
+            </div>
+        );
+    }
+
+    return (
+        <div className="main-container">
+            <h1 className="title">Election DApp</h1>
+
+            <div className="main-content">
+                <div className="account">
+                    <b>Current Account:</b> {account}
+                    <b>Election Leader: </b> {electionLeader}
+                </div>
+
+                <h2>Candidates</h2>
+                <ul>
+                    {candidates.map((candidate, index) => (
+                        <li key={index}>{candidate.name} - {candidate.voteCount.toString()} votes</li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="main-process">
+                <div className="reg-candidate">
+                    <h3>Add Candidate</h3>
+                    <input
+                        type="text"
+                        value={newCandidateName}
+                        onChange={(e) => setNewCandidateName(e.target.value)}
+                        placeholder="Candidate Name"
+                    />
+                    <button className="button" onClick={addCandidate}>
+                        Add Candidate
+                    </button>
+                </div>
+
+                <div className="reg-voter">
+                    <h3>Register Voter</h3>
+                    <input
+                        type="text"
+                        value={voterAddress}
+                        onChange={(e) => setVoterAddress(e.target.value)}
+                        placeholder="Voter Address"
+                    />
+                    <button className="button" onClick={registerVoter}>Register Voter</button>
+                </div>
+
+                <div className="cast-vote">
+                    <h3>Cast Vote</h3>
+                    <input
+                        type="number"
+                        value={selectedCandidate}
+                        onChange={(e) => setSelectedCandidate(e.target.value)}
+                        placeholder="Candidate Index"
+                    />
+                    <button className="button" onClick={castVote}>Vote</button>
+                </div>
+            </div>
+
+            <div className="winning-candidate">
+                <h3>Winning Candidate</h3>
+                <button onClick={getWinningCandidate}>Get Winning Candidate</button>
+                <p>{winnerName}</p>
+            </div>
+        </div>
+    );
+}
+
+export default App;
+```
+
+Looks huge and complicated right?
+
+now let's go though one by one function that we add on our `App.jsx`
+
+### Explanation
+#### Import dependencies and file 
+```js
+import React, { useState, useEffect } from 'react';
+import Web3 from "web3";
+import ElectionABI from "/src/artifacts/Election.json";
+import './App.scss';
+```
+There's 4 things we import:
+  - [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) : To initialize state variable and fetch blockchain data
+  - web3 : To interact with our Smart Contract
+  - `Election.json` file 
+  - `App.scss` file
+
+#### useState
+
+useState is a React Hook that lets you add React state to function components. It takes one argument which is the initial state, and it returns an array with two elements: - -
+- current state 
+- function to update it.
+
+```js
+    const [account, setAccount] = useState('');
+    const [loader, setLoader] = useState(true);
+    const [election, setElection] = useState(null);
+
+    const [electionLeader, setElectionLeader] = useState('');
+    const [candidates, setCandidates] = useState([]);
+    const [newCandidateName, setNewCandidateName] = useState('');
+    const [voterAddress, setVoterAddress] = useState('');
+    const [selectedCandidate, setSelectedCandidate] = useState('');
+    const [winnerName, setWinnerName] = useState('');
+```
+
+#### useEffect
+
+useEffect is React Hook as well but it's a function that lets you perform side effects in function components. Side effects could be data fetching of our smart contract data in this case.
+
+```js
+useEffect(() => {
+        loadWeb3();
+        loadBlockchainData();
+    }, []);
+```
+
+#### loadWeb3
+```js
+const loadWeb3 = async () => {
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+        } else {
+            window.alert(
+                "Non-Ethereum browser detected. You should consider trying MetaMask!"
+            );
+        }
+    };
+```
+
+This process does this following:
+
+- Checks if the browser has MetaMask (a cryptocurrency wallet) installed.
+- If MetaMask is installed, it sets up a connection to it.
+- If MetaMask isn't installed, it shows an alert telling the user to consider installing MetaMask.
+
+#### loadBlockchainData
+```js
+const loadBlockchainData = async () => {
+        setLoader(true);
+        const web3 = new Web3(window.ethereum);
+        const accounts = await web3.eth.getAccounts();
+        setAccount(accounts[0]);
+
+        const networkId = await web3.eth.net.getId();
+        const networkData = ElectionABI.networks[networkId];
+
+        if (networkData) {
+            const election = new web3.eth.Contract(ElectionABI.abi, networkData.address);
+            setElection(election);
+
+            const leader = await election.methods.electionLeader().call();
+            setElectionLeader(leader);
+
+            const candidateCount = await election.methods.candidatesCount().call()
+            const candidatesList = [];
+            for (let i = 0; i < candidateCount; i++) {
+                const candidate = await election.methods.candidates(i).call();
+                candidatesList.push(candidate);
+            }
+            console.log("Candidates:", candidatesList); // Debugging log
+            setCandidates(candidatesList);
+            setLoader(false);
+        } else {
+            window.alert('The smart contract is not deployed to current network');
+        }
+    };
+```
+This process does this following:
+- It starts a loading process.
+- It connects to the Ethereum blockchain.
+- It gets the user's Ethereum account and saves it.
+- It gets the ID of the network the user is connected to.
+- It checks if there's a smart contract for an election on this network.
+- If there is:
+- It connects to the election contract.
+- It gets the current leader of the election and saves it.
+- It counts how many candidates there are in the election.
+- It gets information about each candidate and saves it.
+- It stops the loading process.
+- If there isn't a smart contract, it shows an alert saying so.
+
+#### addCandidate
+```js
+const addCandidate = async () => {
+  await election.methods.addCandidate(newCandidateName).send({ from: account });
+  setNewCandidateName('');
+  loadBlockchainData();
+};
+```
+This process does this following:
+- It adds a new candidate to the election using the name stored in newCandidateName.
+- It clears the newCandidateName field.
+- It updates the blockchain data to reflect the new candidate.
+
+#### registerVoter
+```js
+const registerVoter = async () => {
+  await election.methods.registerVoters(voterAddress).send({ from: account });
+  setVoterAddress('');
+  alert('Voter registered successfully');
+};
+```
+This process does this following:
+- It registers a new voter with the address stored in voterAddress.
+- It clears the voterAddress field.
+- It shows an alert saying the voter was registered successfully.
+### castVote
+```js
+  const castVote = async () => {
+  await election.methods.castVote(selectedCandidate).send({ from: account });
+  setSelectedCandidate('');
+  alert('Vote cast successfully');
+  loadBlockchainData();
+};
+```
+This process does this following:
+- It casts a vote for the candidate selected by the user.
+- It clears the selectedCandidate field.
+- It shows an alert saying the vote was cast successfully.
+- It updates the blockchain data to reflect the new vote.
+
+#### getWinningCandidate
+```js
+const getWinningCandidate = async () => {
+  const name = await election.methods.winningCandidate().call();
+  setWinnerName(name);
+  console.log("Winning Candidate:", name); // Debugging log
+};
+```
+This process does this following:
+- It gets the name of the winning candidate from the election.
+- It saves the winner's name.
+- It prints the winner's name for debugging purposes.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
