@@ -890,6 +890,8 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
        - [registerVoter](#registervoter)
        - [castVote](#castvote)
        - [getWinningCandidate](#getwinningcandidate)
+     - [Understanding The Application Process](#understanding-the-application-process)
+       - [Breaking Down Each Section](#breaking-down-each-section)
        
 
 # Responsive Web Design
@@ -1540,7 +1542,7 @@ export default App;
 
 Looks huge and complicated right?
 
-now let's go though one by one function that we add on our `App.jsx`
+now let's go through one by one function that we add on our `App.jsx`
 
 ### Explanation
 #### Import dependencies and file 
@@ -1558,7 +1560,7 @@ There's 4 things we import:
 
 #### useState
 
-useState is a React Hook that lets you add React state to function components. It takes one argument which is the initial state, and it returns an array with two elements: - -
+useState is a React Hook that lets you add React state to function components. It takes one argument which is the initial state, and it returns an array with two elements:
 - current state 
 - function to update it.
 
@@ -1601,7 +1603,6 @@ const loadWeb3 = async () => {
 ```
 
 This process does this following:
-
 - Checks if the browser has MetaMask (a cryptocurrency wallet) installed.
 - If MetaMask is installed, it sets up a connection to it.
 - If MetaMask isn't installed, it shows an alert telling the user to consider installing MetaMask.
@@ -1638,6 +1639,7 @@ const loadBlockchainData = async () => {
         }
     };
 ```
+
 This process does this following:
 - It starts a loading process.
 - It connects to the Ethereum blockchain.
@@ -1645,11 +1647,11 @@ This process does this following:
 - It gets the ID of the network the user is connected to.
 - It checks if there's a smart contract for an election on this network.
 - If there is:
-- It connects to the election contract.
-- It gets the current leader of the election and saves it.
-- It counts how many candidates there are in the election.
-- It gets information about each candidate and saves it.
-- It stops the loading process.
+  - It connects to the election contract.
+  - It gets the current leader of the election and saves it.
+  - It counts how many candidates there are in the election.
+  - It gets information about each candidate and saves it.
+  - It stops the loading process.
 - If there isn't a smart contract, it shows an alert saying so.
 
 #### addCandidate
@@ -1677,9 +1679,10 @@ This process does this following:
 - It registers a new voter with the address stored in voterAddress.
 - It clears the voterAddress field.
 - It shows an alert saying the voter was registered successfully.
+  
 ### castVote
 ```js
-  const castVote = async () => {
+const castVote = async () => {
   await election.methods.castVote(selectedCandidate).send({ from: account });
   setSelectedCandidate('');
   alert('Vote cast successfully');
@@ -1704,6 +1707,110 @@ This process does this following:
 - It gets the name of the winning candidate from the election.
 - It saves the winner's name.
 - It prints the winner's name for debugging purposes.
+
+## Understanding The Application Process
+
+### Breaking Down Each Section
+
+**Address Info**
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/c46f4e2d-45e7-4105-ab93-88c0b8b47926">
+</p> 
+
+This section (personally) is very crucial information to include into your Decentralized Application (DApps) as you know who's the Creator (**Election Leader** also the one who deploy the smart contract) and **Current Address** so you know who's the one that doing the transaction.
+
+**Candidates Info**
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/ce5777db-bbfd-4532-8af3-ad2da942d589">
+</p> 
+
+Now this section is based on our Smart Contract:
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/da29b205-04a9-4b41-a296-91bfe6bee0a2">
+</p> 
+
+It's a good decision to be made to include it as well on our Application.
+
+**Add Candidate** 
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/aa34cfe3-5c75-4982-aa56-d3f90f597f7c">
+</p> 
+
+This section is based on our addCandidate() function on our smart contract 
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/14dd4d28-4f1e-43e0-9ff7-b295067c8699">
+</p> 
+
+As you can see, it accept 1 argument which is `string memory _name` 
+
+**Register Voters** 
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/d2cb7af9-9396-4db1-ac58-04aa08a14831">
+</p> 
+
+This section is based on our registerVoters() function on our smart contract 
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/b2ea684b-751c-403f-a47b-a2bbb909d484">
+</p> 
+
+As you can see, it accept 1 argument which is `string memory _name`, and it set the `bool voted` condition into `false`
+
+**Cast Vote**
+
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/ede5b741-db60-43ca-b8e7-d5c58cc400b8">
+</p> 
+
+This section is based on our castVote() function on our smart contract 
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/31b8a259-5c88-41ce-a8ed-c0fec5e1e0a1">
+</p> 
+
+As you can see, it accept 1 argument which is `uint256 _candidateIndex` since our candidate is in array, and it 
+- set the `bool voted` condition into `true`
+- it records that `uint256 _candidateIndex` is mapped to the person in candidate array (if vote 0, then person in 0 index will be voted)
+- add the `voteCount` of the candidate
+
+**Winning Candidate**  
+
+<p align="center">
+    <img width="600" src="!https://github.com/alifzwan/web3Lab/assets/63784108/74704ca6-0f43-4ed1-b8d5-306da5ae7f3e">
+</p> 
+
+This section is just calling, which is there aint any transaction required to do so.
+
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/ede5b741-db60-43ca-b8e7-d5c58cc400b8">
+</p> 
+
+It check which candidate have the highest `voteCount` and display it.
+
+### Transaction 
+
+Transaction will be made if you are executing a function.
+
+This 3 section:
+
+<p align="center">
+    <img width="1000" src="https://github.com/alifzwan/web3Lab/assets/63784108/0bc0f9b7-073f-489c-b65e-fca7c3fe7e35">
+</p> 
+
+This process required a transaction to be executed. 
+
+How do you know there is a transaction? 
+
+This notification will pops out. 
+
+<p align="center">
+    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/3fb47205-ee67-4af6-94a7-1320567a3cf0">
+</p> 
+
+It pretty much like you want to confirm some banking transaction.
+
+If you don't have enough funds in your wallet, you would not be able to execute this transaction thus please make sure your wallet have enough funds to do the transaction.
+
+
+
 
 
 
