@@ -845,7 +845,9 @@ So Javascript will undergo it's fetching method to obtain all of the variables, 
   - **Remember**, this may be a new technology and practice for you to explore and develop. So it supposed to be hard for a beginner. If it's easy then everyone would've been a great developer right now. If you only do what you can do, you will never be more than you are.
   - I promise whenever you solve some error that has been interrupting your development, you will feel some sort of satisfaction.
 
-<p></p>
+‎<h1 align="center">   
+  ‎ 
+</h1> 
 
 
 <p align="center">
