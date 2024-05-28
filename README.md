@@ -1775,14 +1775,10 @@ As you can see, it accept 1 argument which is `uint256 _candidateIndex` since ou
 
 **Winning Candidate**  
 
-<p align="center">
-    <img width="600" src="!https://github.com/alifzwan/web3Lab/assets/63784108/74704ca6-0f43-4ed1-b8d5-306da5ae7f3e">
-</p> 
-
 This section is just calling, which is there aint any transaction required to do so.
 
 <p align="center">
-    <img width="600" src="https://github.com/alifzwan/web3Lab/assets/63784108/ede5b741-db60-43ca-b8e7-d5c58cc400b8">
+    <img width="400" src="https://github.com/alifzwan/web3Lab/assets/63784108/89521812-cf5c-4565-a44e-46032efbf7c0">
 </p> 
 
 It check which candidate have the highest `voteCount` and display it.
